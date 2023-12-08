@@ -5,7 +5,12 @@
     </a>
     <div class="side-nav__devider my-6"></div>
     <ul>
-
+        <li>
+            <a href="/admin" class="side-menu {{request()->is('/admin') ? 'side-menu--active' : ''}}">
+                <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
+                <div class="side-menu__title"> Admin </div>
+            </a>
+        </li>
     {{-- <li>
         <a href="javascript:;.html" class ="side-menu {{request()->is('backoffice/product')}}">
             <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
