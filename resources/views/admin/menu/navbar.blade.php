@@ -6,7 +6,7 @@
     <div class="side-nav__devider my-6"></div>
     <ul>
         <li>
-            <a href="/admin" class="side-menu {{request()->is('/admin') ? 'side-menu--active' : ''}}">
+            <a href="/admin" class="side-menu {{request()->is('admin') ? 'side-menu--active' : ''}}">
                 <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
                 <div class="side-menu__title"> Admin </div>
             </a>

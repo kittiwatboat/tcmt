@@ -63,10 +63,6 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                             <div id="modal-datepicker" class="p-5">
                                 <div class="preview">
-                                    <!-- BEGIN: Show Modal Toggle -->
-                                    {{-- <div class="text-center"> <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#datepicker-modal-preview" class="btn btn-primary">Import Admin</a> </div> --}}
-                                    <!-- END: Show Modal Toggle -->
-                                    <!-- BEGIN: Modal Content -->
                                     <div id="datepicker-modal-preview" class="modal" tabindex="-1" aria-hidden="true">
                                         <div class="modal-dialog">
                                             {{-- <form action="{{route('admin.import')}}" method="POST" enctype="multipart/form-data"> --}}
@@ -128,25 +124,27 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </tr>
                             </thead>
                             <tbody>
-
+                                @foreach ($user_list as $ul)
                                 <tr class="intro-x">
-
                                     <td >
-                                        <div class="w-60 h-10"> Admin001 </div>
+                                        <div> {{$ul->username}} </div>
                                     </td>
                                     <td >
-                                        <div class="w-60 h-10"> Oat </div>
+                                        <div> {{$ul->firstname}} {{$ul->lastname}} </div>
                                     </td>
                                     <td>
-                                        <div class="w-60 h-10"> Superadmin </div>
+                                        <div> {{$ul->role}} </div>
                                     </td>
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
-                                            <a class="flex items-center mr-3" href="{{url('/admin/edit_user/')}}"><i data-lucide="check-square" class="w-4 h-4 mr-1"></i>Edit</a>
-                                            <div class="text-center"> <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-modal-preview" class="btn btn-outline-danger"> Delete</a> </div> <!-- END: Modal Toggle -->
+                                            @if ($ul->role != 'super admin')
+                                            <a class="flex items-center mr-3" href="javascript:;" data-tw-toggle="modal" data-tw-target="#edit-modal-user{{$ul->id}}" ><i data-lucide="check-square" class="w-4 h-4 mr-1"></i>Edit</a>
+                                            <div class="text-center"> <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-modal-user-{{$ul->id}}" class="btn btn-outline-danger"> Delete</a> </div> <!-- END: Modal Toggle -->
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -171,49 +169,130 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
             <!-- END: Content -->
         </div>
-        <!-- BEGIN: Super Large Modal Content -->
+        <!-- BEGIN: Create Admin Modal -->
         <div id="superlarge-modal-size-preview" class="modal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                    <div class="modal-body p-10 text-center">
-                        <!-- BEGIN: Modal Header -->
+                    <!-- BEGIN: Modal Header -->
                         <div class="modal-header">
                             <h2 class="font-medium text-base mr-auto">ADD</h2>
-                            <div class="dropdown sm:hidden"> <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="more-horizontal" class="w-5 h-5 text-slate-500"></i> </a>
-                                <div class="dropdown-menu w-40">
-                                    <ul class="dropdown-content">
-                                        <li> <a href="javascript:;" class="dropdown-item"> <i data-lucide="file" class="w-4 h-4 mr-2"></i> Download Docs </a> </li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
                         <!-- END: Modal Header -->
+                        <form action="{{url('/admin/create_user')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
                         <!-- BEGIN: Modal Body -->
                         <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
                             <div class="col-span-12 sm:col-span-6">
                                 <label for="modal-form-1" class="form-label">Username</label>
-                                <input id="modal-form-1" type="text" class="form-control" placeholder="ตัวอย่าง admin_name">
+                                <input id="modal-form-1" name="username" type="text" class="form-control" placeholder="ตัวอย่าง admin_name" value="{{old('username')}}" required>
                             </div>
                             <div class="col-span-12 sm:col-span-6">
                                 <label for="modal-form-2" class="form-label">Password</label>
-                                <input id="modal-form-2" type="text" class="form-control" placeholder="ตัวอักษรขั้นต่ำ 8 ตัว">
+                                <input id="modal-form-2" name="password" type="text" class="form-control" placeholder="ตัวอักษรขั้นต่ำ 8 ตัว" value="{{old('password')}}" placeholder="ตัวอักษร a-z,0-9 ต้องมีทั้งตัวพิมพ์เล็กและตัวพิมพ์ใหญ่ ขั้นต่ำ 8 ตัว" min="8" required>
                             </div>
                             <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-1" class="form-label">First name</label>
-                                <input id="modal-form-1" type="text" class="form-control" placeholder="ชื่อ">
+                                <label for="modal-form-3" class="form-label">First name</label>
+                                <input id="modal-form-3" name="firstname" type="text" class="form-control" placeholder="ชื่อ" value="{{old('firstname')}}" required>
                             </div>
                             <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-2" class="form-label">Last name</label>
-                                <input id="modal-form-2" type="text" class="form-control" placeholder="นามสกุล">
+                                <label for="modal-form-4" class="form-label">Last name</label>
+                                <input id="modal-form-4" name="lastname" type="text" class="form-control" placeholder="นามสกุล" value="{{old('lastname')}}" required>
                             </div>
-
+                            <div class="col-span-12 sm:col-span-6">
+                                <label class="form-label">Role</label>
+                                <select data-placeholder="Select your favorite actors" name="role" class="tom-select w-full" id="crud-form-2" >
+                                    <option value="admin" selected>admin</option>
+                                    <option value="viewer">viewer</option>
+                                    {{-- <option value="2">PC & Laptop</option>
+                                    <option value="3">Smartphone & Tablet</option>
+                                    <option value="4">Photography</option> --}}
+                                </select>
+                            </div>
                         </div>
                         <!-- END: Modal Body -->
+                        <div class="modal-footer">
+                            <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1">Cancel</button>
+                            <button type="submit" class="btn btn-primary w-20">Save</button>
+                        </div>
+                        <!-- END: Modal Footer -->
+                        </form>
+                    </div>
+            </div>
+        </div>
+        <!-- END: Create Admin Modal -->
+        <!-- BEGIN: Create Admin Modal -->
+        @foreach ($user_list as $ul2)
+        <div id="edit-modal-user{{$ul2->id}}" class="modal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <!-- BEGIN: Modal Header -->
+                        <div class="modal-header">
+                            <h2 class="font-medium text-base mr-auto">Edit admin <b>{{$ul2->username}}</b></h2>
+                        </div>
+                        <!-- END: Modal Header -->
+                        <form action="{{url('/admin/update_user')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$ul2->id}}">
+                        <!-- BEGIN: Modal Body -->
+                        <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
+                            <div class="col-span-12 sm:col-span-6">
+                                <label for="modal-form-1" class="form-label">Username</label>
+                                <input id="modal-form-1" name="username" type="text" class="form-control" placeholder="ตัวอย่าง admin_name" value="{{$ul2->username}}" required>
+                            </div>
+                            <div class="col-span-12 sm:col-span-6">
+                                <label for="modal-form-2" class="form-label">Password <span style="color: red">*ถ้าไม่ได้เปลี่ยน password ไม่จำเป็นต้องใส่</span></label>
+                                <input id="modal-form-2" name="password" type="password" class="form-control" placeholder="ตัวอักษร a-z,0-9 ต้องมีทั้งตัวพิมพ์เล็กและตัวพิมพ์ใหญ่ ขั้นต่ำ 8 ตัว" min="8" value="">
+                            </div>
+                            <div class="col-span-12 sm:col-span-6">
+                                <label for="modal-form-3" class="form-label">First name</label>
+                                <input id="modal-form-3" name="firstname" type="text" class="form-control" placeholder="ชื่อ" value="{{$ul2->firstname}}" required>
+                            </div>
+                            <div class="col-span-12 sm:col-span-6">
+                                <label for="modal-form-4" class="form-label">Last name</label>
+                                <input id="modal-form-4" name="lastname" type="text" class="form-control" placeholder="นามสกุล" value="{{$ul2->lastname}}" required>
+                            </div>
+                            <div class="col-span-12 sm:col-span-6">
+                                <label class="form-label">Role</label>
+                                <select data-placeholder="Select your favorite actors" name="role" class="tom-select w-full" id="crud-form-2" >
+                                    <option value="admin" @if ($ul2->role == 'admin') selected @endif>admin</option>
+                                    <option value="viewer" @if ($ul2->role == 'viewer') selected @endif>viewer</option>
+                                    {{-- <option value="2">PC & Laptop</option>
+                                    <option value="3">Smartphone & Tablet</option>
+                                    <option value="4">Photography</option> --}}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- END: Modal Body -->
+                        <div class="modal-footer">
+                            <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1">Cancel</button>
+                            <button type="submit" class="btn btn-primary w-20">Save</button>
+                        </div>
+                        <!-- END: Modal Footer -->
+                        </form>
+                    </div>
+            </div>
+        </div>
+        @endforeach
+        <!-- END: Create Admin Modal -->
+        <!-- BEGIN: Modal Content -->
+        @foreach ($user_list as $del_user)
+        <div id="delete-modal-user-{{$del_user->id}}" class="modal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body p-0">
+                        <div class="p-5 text-center"> <i data-lucide="x-circle" class="w-16 h-16 text-danger mx-auto mt-3"></i>
+                            <div class="text-3xl mt-5">Are you sure?</div>
+                            <div class="text-slate-500 mt-2">Do you really want to delete {{$del_user->role}} {{$del_user->username}}? <br>This process cannot be undone.</div>
+                        </div>
+                        <div class="px-5 pb-8 text-center">
+                            <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
+                            <a href="/admin/delete_user/{{$del_user->id}}" class="btn btn-danger w-24">Delete</a> </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- END: Super Large Modal Content -->
+        @endforeach
+        <!-- END: Modal Content -->
 
         <!-- BEGIN: JS Assets-->
         {{-- <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
@@ -241,5 +320,54 @@ License: You must have a valid license purchased only from themeforest(the above
                 });
                 }
         </script>
+        @if (session('success'))
+        <script>
+            Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Login สำเร็จ",
+            showConfirmButton: false,
+            timer: 1500
+            });
+        </script>
+        @endif
+        @if (session('save_success'))
+        @php
+            $save_text=session('save_success')
+        @endphp
+        <script>
+            Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "{{$save_text}}",
+            showConfirmButton: false,
+            timer: 1500
+            });
+        </script>
+        @endif
+        @php
+            $sh="";
+        @endphp
+
+        @if($errors->count())
+            @foreach ($errors->all() as $error)
+                @php
+                    $sh.=" ".$error."<br>";
+                @endphp
+            @endforeach
+        @php
+            echo "
+            <script>
+                Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        html: '$sh',
+
+        })
+            </script>
+            "
+        @endphp
+        @endif
+
     </body>
 </html>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +14,16 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.dashboard.index');
+
+Route::get('/login',[AuthController::class,'login']);
+Route::post('/login_func',[AuthController::class,'admin_login']);
+Route::get('/logout',[AuthController::class, 'logout']);
+// admin page
+route::group(['middleware'=>['checklogin']], function(){
+    Route::get('/admin',[AdminController::class,'index']);
+    Route::post('/admin/create_user',[AdminController::class,'create_admin']);
+    Route::post('/admin/update_user',[AdminController::class,'update_admin']);
+    Route::get('/admin/delete_user/{id}',[AdminController::class, 'delete_admin']);
 });
 
-// admin page
-Route::get('/admin',[AdminController::class,'index']);
+
