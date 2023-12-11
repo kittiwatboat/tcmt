@@ -124,16 +124,17 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <th class="whitespace-nowrap">USERNAME</th>
                                     <th class="whitespace-nowrap">NAME</th>
                                     <th class="whitespace-nowrap">ROLE</th>
+                                    <th class="text-center whitespace-nowrap">ACTIONS</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 <tr class="intro-x">
 
-                                    <td class="w-60">
+                                    <td >
                                         <div class="w-60 h-10"> Admin001 </div>
                                     </td>
-                                    <td class="w-60">
+                                    <td >
                                         <div class="w-60 h-10"> Oat </div>
                                     </td>
                                     <td>
@@ -142,10 +143,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
                                             <a class="flex items-center mr-3" href="{{url('/admin/edit_user/')}}"><i data-lucide="check-square" class="w-4 h-4 mr-1"></i>Edit</a>
+                                            <div class="text-center"> <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-modal-preview" class="btn btn-outline-danger"> Delete</a> </div> <!-- END: Modal Toggle -->
                                         </div>
                                     </td>
                                 </tr>
-
                             </tbody>
                         </table>
                     </div>
