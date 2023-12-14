@@ -20,6 +20,7 @@ Route::post('/login_func',[AuthController::class,'admin_login']);
 Route::get('/logout',[AuthController::class, 'logout']);
 // admin page
 route::group(['middleware'=>['checklogin']], function(){
+    Route::get('/',[AdminController::class,'index']);
     Route::get('/admin',[AdminController::class,'index']);
     Route::post('/admin/create_user',[AdminController::class,'create_admin']);
     Route::post('/admin/update_user',[AdminController::class,'update_admin']);
