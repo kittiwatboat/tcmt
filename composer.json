@@ -9,12 +9,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
+        "doctrine/dbal": "^3.7",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.83",
         "laravel/tinker": "^2.0",
-        "maatwebsite/excel": "^1.1"
+        "maatwebsite/excel": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.3.6",
