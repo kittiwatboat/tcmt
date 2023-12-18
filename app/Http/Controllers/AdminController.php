@@ -9,9 +9,12 @@ use Validator;
 class AdminController extends Controller
 {
     public function index(Request $request){
+        //show = จำนวนรายชื่อที่จะแสดงใน 1 หน้า
         if($request->show == null){
+            //ถ้า show = null แสดงแค่ 10
             $user_list=User::paginate(10);
         }else{
+            //ถ้า show != null แสดงตามจำนวนที่ส่งเข้ามา
             $user_list=User::paginate($request->show);
         }
         return view('admin.user.index',[
