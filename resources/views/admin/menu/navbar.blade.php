@@ -11,6 +11,24 @@
                 <div class="side-menu__title"> Admin </div>
             </a>
         </li>
+        <li>
+            <a href="/Data" class="side-menu {{request()->is('Data') ? 'side-menu--active' : ''}}">
+                <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
+                <div class="side-menu__title"> Data </div>
+            </a>
+        </li>
+        <li>
+            <a href="/Payment" class="side-menu {{request()->is('Payment') ? 'side-menu--active' : ''}}">
+                <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
+                <div class="side-menu__title"> Payment </div>
+            </a>
+        </li>
+        <li>
+            <a href="/Receipt" class="side-menu {{request()->is('Receipt') ? 'side-menu--active' : ''}}">
+                <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
+                <div class="side-menu__title"> Receipt </div>
+            </a>
+        </li>
     {{-- <li>
         <a href="javascript:;.html" class ="side-menu {{request()->is('backoffice/product')}}">
             <div class="side-menu__icon"> <i data-lucide="home"></i> </div>

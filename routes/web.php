@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DataController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +29,11 @@ route::group(['middleware'=>['checklogin']], function(){
     Route::get('/admin/delete_user/{id}',[AdminController::class, 'delete_admin']);
 });
 
+// Data page
+Route::get('/Data',[DataController::class,'index']);
 
+//Payment
+Route::get('/Payment',[PaymentController::class,'index']);
+
+//Receipt Page
+Route::get('/Receipt',[ReceiptController::class,'index']);
