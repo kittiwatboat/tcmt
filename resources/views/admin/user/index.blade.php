@@ -153,15 +153,15 @@ License: You must have a valid license purchased only from themeforest(the above
                     <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
                         <nav class="w-full sm:w-auto sm:mr-auto">
                             <ul class="pagination">
-                                {{-- {{ $users->links('vendor.pagination.custom') }} --}}
+                                {{ $user_list->links('vendor.pagination.custom') }}
                             </ul>
                         </nav>
-                        {{-- <select class="w-20 form-select box mt-3 sm:mt-0" id="show" name="show" onchange="document.location.href=`{{url('/backoffice/user')}}?show=${this.value}`" >
+                        <select class="w-20 form-select box mt-3 sm:mt-0" id="show" name="show" onchange="document.location.href=`{{url('/admin')}}?show=${this.value}`" >
                             <option value="10" {{@$show=='10'?'selected':''}}>10</option>
                             <option value="25" {{@$show=='25'?'selected':''}}>25</option>
                             <option value="35" {{@$show=='35'?'selected':''}}>35</option>
                             <option value="50" {{@$show=='50'?'selected':''}}>50</option>
-                        </select> --}}
+                        </select>
                     </div>
                     <!-- END: Pagination -->
                 </div>

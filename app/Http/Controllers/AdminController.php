@@ -8,10 +8,15 @@ use Illuminate\Support\Facades\Hash;
 use Validator;
 class AdminController extends Controller
 {
-    public function index(){
-        $user_list=User::get();
+    public function index(Request $request){
+        if($request->show == null){
+            $user_list=User::paginate(10);
+        }else{
+            $user_list=User::paginate($request->show);
+        }
         return view('admin.user.index',[
-            'user_list'=>$user_list
+            'user_list'=>$user_list,
+            'show'=>$request->show
         ]);
     }
     public function create_admin(Request $request){
