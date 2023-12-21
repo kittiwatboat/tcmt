@@ -18,6 +18,12 @@
             </a>
         </li>
         <li>
+            <a href="/Working_time" class="side-menu {{request()->is('Data') ? 'side-menu--active' : ''}}">
+                <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
+                <div class="side-menu__title"> Working time </div>
+            </a>
+        </li>
+        <li>
             <a href="/Payment" class="side-menu {{request()->is('Payment') ? 'side-menu--active' : ''}}">
                 <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
                 <div class="side-menu__title"> Payment </div>

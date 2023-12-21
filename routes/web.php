@@ -6,6 +6,7 @@ use App\Http\Controllers\DataController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OnshiftController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +29,8 @@ route::group(['middleware'=>['checklogin']], function(){
     Route::post('/admin/create_user',[AdminController::class,'create_admin']);
     Route::post('/admin/update_user',[AdminController::class,'update_admin']);
     Route::get('/admin/delete_user/{id}',[AdminController::class, 'delete_admin']);
+
+    Route::get('/Working_time',);
 });
 
 // Data page
