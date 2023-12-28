@@ -169,7 +169,7 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
             <!-- END: Content -->
         </div>
-        <!-- BEGIN: Create Admin Modal -->
+        <!-- *******BEGIN: Create Admin Modal -->
         <div id="superlarge-modal-size-preview" class="modal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
@@ -219,8 +219,8 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
             </div>
         </div>
-        <!-- END: Create Admin Modal -->
-        <!-- BEGIN: Create Admin Modal -->
+        <!-- *******END: Create Admin Modal -->
+        <!-- *******BEGIN: Edit Admin Modal -->
         @foreach ($user_list as $ul2)
         <div id="edit-modal-user{{$ul2->id}}" class="modal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-xl">
@@ -273,8 +273,8 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
         @endforeach
-        <!-- END: Create Admin Modal -->
-        <!-- BEGIN: Modal Content -->
+        <!-- *******END: Edit Admin Modal -->
+        <!-- *******BEGIN: Modal Delete Content -->
         @foreach ($user_list as $del_user)
         <div id="delete-modal-user-{{$del_user->id}}" class="modal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
@@ -292,7 +292,7 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
         @endforeach
-        <!-- END: Modal Content -->
+        <!-- *******END: Modal Delete Content -->
 
         <!-- BEGIN: JS Assets-->
         {{-- <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>

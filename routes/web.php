@@ -7,6 +7,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OnshiftController;
+use App\http\Controllers\SalaryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,3 +42,6 @@ Route::get('/Payment',[PaymentController::class,'index']);
 
 //Receipt Page
 Route::get('/Receipt',[ReceiptController::class,'index']);
+
+Route::get('cal_salary',[SalaryController::class,'cal_salary']);
+Route::get('time_check',[SalaryController::class,'time_check']);
