@@ -8,6 +8,11 @@ use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OnshiftController;
 use App\http\Controllers\SalaryController;
+use App\Http\Controllers\Setdata\SetdataController;
+use App\Http\Controllers\Setdata\CompanyController;
+use App\Http\Controllers\Setdata\EmployeeController;
+use App\Http\Controllers\Setdata\PeriodController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +38,29 @@ route::group(['middleware'=>['checklogin']], function(){
 
     Route::get('/Working_time',);
 });
+
+
+//Setdata page
+Route::get('/Setdata',[SetdataController::class,'index']);
+    //Company
+    Route::get('/Company',[CompanyController::class,'index']);
+    Route::post('/Company/create',[CompanyController::class,'create']);
+    Route::post('/Company/update',[CompanyController::class,'update']);
+    Route::get('/Company/delete/{id}',[CompanyController::class, 'delete']);
+
+    //Employee
+    Route::get('/Employee',[EmployeeController::class,'index']);
+    Route::post('/Employee/create',[EmployeeController::class,'create']);
+    Route::post('/Employee/update',[EmployeeController::class,'update']);
+    Route::get('/Employee/delete/{id}',[EmployeeController::class, 'delete']);
+
+    //Period
+    Route::get('/Period',[PeriodController::class,'index']);
+    Route::post('/Period/create',[PeriodController::class,'create']);
+    Route::post('/Period/update',[PeriodController::class,'update']);
+    Route::get('/Period/delete/{id}',[PeriodController::class, 'delete']);
+
+//Setdata page
 
 // Data page
 Route::get('/Data',[DataController::class,'index']);

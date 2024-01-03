@@ -15,16 +15,15 @@ class CreateTbEmployeeTable extends Migration
     {
         Schema::create('tb_employee', function (Blueprint $table) {
             $table->id();
-            $table->text('employee_ID')->nullable();
-            $table->text('scan_code')->nullable();
-            $table->text('first_name')->nullable();
-            $table->text('last_name')->nullable();
-            $table->text('job_No')->nullable();
-            $table->text('WO_No')->nullable();
-            $table->text('address')->nullable();
-            $table->text('bank_No')->nullable();
-            $table->text('bank')->nullable();
-            $table->text('On_shift')->nullable();
+            $table->text('image')->nullable();                          //รูปพนักงาน
+            $table->text('prefix_name')->nullable();                    //คำนำหน้าชื่อ
+            $table->text('first_name')->nullable();                     //ชื่อ
+            $table->text('last_name')->nullable();                      //นามสกุล
+            $table->text('address')->nullable();                        //ที่อยู่
+            $table->text('employee_ID')->nullable();                    //รหัสพนักงาน
+            $table->text('scan_code')->nullable();                      //รหัสสแกนนิ้ว
+            $table->text('bank')->nullable();                           //ธนาคาร
+            $table->text('bank_No')->nullable();                        //เลขบัญชี
             $table->timestamps();
         });
     }

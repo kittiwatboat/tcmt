@@ -11,10 +11,54 @@
                 <div class="side-menu__title"> Admin </div>
             </a>
         </li>
+        
+        <li>
+            <a href="javascript:;" class="side-menu side-menu--active">
+                <div class="side-menu__icon"><i data-lucide="archive"></i> </div>
+                <div class="side-menu__title">
+                    ตั้งค่าข้อมูล
+                    <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                </div>
+            </a>  
+            <ul>
+                <li >
+                    <a href="/Company" class="side-menu {{request()->is('Company') ? 'side-menu--active' : ''}}">
+                        <div class="side-menu__icon">
+                                <!-- <svg width="25" height="25" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.122 8.76a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0Z"></path>
+                                <path d="M4.323 3.36a2.4 2.4 0 0 0-2.4 2.4v12a2.4 2.4 0 0 0 2.4 2.4h14.4a2.4 2.4 0 0 0 2.4-2.4v-12a2.4 2.4 0 0 0-2.4-2.4h-14.4Zm14.4 1.2a1.2 1.2 0 0 1 1.2 1.2v7.8l-4.532-2.336a.602.602 0 0 0-.693.112l-4.452 4.452-3.192-2.127a.6.6 0 0 0-.756.075L3.123 16.56V5.76a1.2 1.2 0 0 1 1.2-1.2h14.4Z"></path>
+                                </svg> -->
+                                <i data-lucide="edit"></i>
+                        </div>
+                        <div class="side-menu__title"> ข้อมูลบริษัท </div>
+                    </a>
+                    <a href="/Employee" class="side-menu {{request()->is('Employee') ? 'side-menu--active' : ''}}">
+                        <div class="side-menu__icon">
+                                <!-- <svg width="30" height="30" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.4 7.2a.6.6 0 0 0 0 1.2h7.2a.6.6 0 1 0 0-1.2H8.4Zm-.6 3a.6.6 0 0 1 .6-.6h7.2a.6.6 0 1 1 0 1.2H8.4a.6.6 0 0 1-.6-.6Zm.6 1.8a.6.6 0 1 0 0 1.2h7.2a.6.6 0 1 0 0-1.2H8.4Zm0 2.4a.6.6 0 1 0 0 1.2H12a.6.6 0 1 0 0-1.2H8.4Z"></path>
+                                <path d="M4.8 4.8a2.4 2.4 0 0 1 2.4-2.4h9.6a2.4 2.4 0 0 1 2.4 2.4v14.4a2.4 2.4 0 0 1-2.4 2.4H7.2a2.4 2.4 0 0 1-2.4-2.4V4.8Zm12-1.2H7.2A1.2 1.2 0 0 0 6 4.8v14.4a1.2 1.2 0 0 0 1.2 1.2h9.6a1.2 1.2 0 0 0 1.2-1.2V4.8a1.2 1.2 0 0 0-1.2-1.2Z"></path>
+                                </svg> -->
+                            <i data-lucide="edit"></i> 
+                        </div>
+                        <div class="side-menu__title"> ข้อมูลพนักงาน </div>
+                    </a>
+                    <a href="/Period" class="side-menu {{request()->is('Period') ? 'side-menu--active' : ''}}">
+                        <div class="side-menu__icon">
+                                <!-- <svg width="30" height="30" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.4 7.2a.6.6 0 0 0 0 1.2h7.2a.6.6 0 1 0 0-1.2H8.4Zm-.6 3a.6.6 0 0 1 .6-.6h7.2a.6.6 0 1 1 0 1.2H8.4a.6.6 0 0 1-.6-.6Zm.6 1.8a.6.6 0 1 0 0 1.2h7.2a.6.6 0 1 0 0-1.2H8.4Zm0 2.4a.6.6 0 1 0 0 1.2H12a.6.6 0 1 0 0-1.2H8.4Z"></path>
+                                <path d="M4.8 4.8a2.4 2.4 0 0 1 2.4-2.4h9.6a2.4 2.4 0 0 1 2.4 2.4v14.4a2.4 2.4 0 0 1-2.4 2.4H7.2a2.4 2.4 0 0 1-2.4-2.4V4.8Zm12-1.2H7.2A1.2 1.2 0 0 0 6 4.8v14.4a1.2 1.2 0 0 0 1.2 1.2h9.6a1.2 1.2 0 0 0 1.2-1.2V4.8a1.2 1.2 0 0 0-1.2-1.2Z"></path>
+                                </svg> -->
+                            <i data-lucide="edit"></i> 
+                        </div>
+                        <div class="side-menu__title"> ข้อมูลช่วงเวลา </div>
+                    </a>
+                </li>    
+            </ul>
+        </li>
         <li>
             <a href="/Data" class="side-menu {{request()->is('Data') ? 'side-menu--active' : ''}}">
                 <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
-                <div class="side-menu__title"> Data </div>
+                <div class="side-menu__title"> ลงข้อมูล </div>
             </a>
         </li>
         <li>

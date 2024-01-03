@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeOnShiftInTbEmployee extends Migration
+class CreateTbCompany extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class ChangeOnShiftInTbEmployee extends Migration
      */
     public function up()
     {
-        Schema::table('tb_employee', function (Blueprint $table) {
-            $table->dateTime('On_shift')->change();
+        Schema::create('tb_company', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +26,6 @@ class ChangeOnShiftInTbEmployee extends Migration
      */
     public function down()
     {
-        Schema::table('tb_employee', function (Blueprint $table) {
-            $table->text('On_shift')->change();
-        });
+        Schema::dropIfExists('tb_company');
     }
 }
