@@ -62,7 +62,7 @@
             </a>
         </li>
         <li>
-            <a href="/Working_time" class="side-menu {{request()->is('Data') ? 'side-menu--active' : ''}}">
+            <a href="/Working_time" class="side-menu {{request()->is('Working_time') ? 'side-menu--active' : ''}}">
                 <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
                 <div class="side-menu__title"> Working time </div>
             </a>
