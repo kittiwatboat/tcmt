@@ -12,14 +12,29 @@ class AdminController extends Controller
         //show = จำนวนรายชื่อที่จะแสดงใน 1 หน้า
         if($request->show == null){
             //ถ้า show = null แสดงแค่ 10
+            if(!empty($request->search)){
+            $user_list=User::where('username','like','%'.$request->search.'%')
+            ->orwhere('firstname','like','%'.$request->search.'%')
+            ->orwhere('lastname','like','%'.$request->search.'%')
+            ->paginate(10);
+            }else{
             $user_list=User::paginate(10);
+            }
         }else{
             //ถ้า show != null แสดงตามจำนวนที่ส่งเข้ามา
+            if(!empty($request->search)){
+            $user_list=User::where('username','like','%'.$request->search.'%')
+            ->orwhere('firstname','like','%'.$request->search.'%')
+            ->orwhere('lastname','like','%'.$request->search.'%')
+            ->paginate($request->show);
+            }else{
             $user_list=User::paginate($request->show);
+            }
         }
         return view('admin.user.index',[
             'user_list'=>$user_list,
-            'show'=>$request->show
+            'show'=>$request->show,
+            'search'=>$request->search
         ]);
     }
     public function create_admin(Request $request){
