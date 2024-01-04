@@ -10,4 +10,5 @@ class TB_Employee extends Model
     use HasFactory;
     protected $table = 'tb_employee';
     protected $primaryKey = 'id';
+    public $timestamps = true;
 }

@@ -10,7 +10,6 @@ class EmployeeController extends Controller
 {
     public function index(){
         $data_list=TB_Employee::get(); //เชื่อมฐานข้อมูล
-        // dd($data_list);
         return view('admin.employee.index',[
             'data_list'=>$data_list
         ]);
