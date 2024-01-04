@@ -119,32 +119,30 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <tr>
                                     <th class="whitespace-nowrap">ชื่อพนักงาน</th>
                                     <th class="whitespace-nowrap">ที่อยู่พนักงาน</th>
-                                    <th class="whitespace-nowrap">เวลาที่สร้าง</th>
+                                    <th class="whitespace-nowrap">วัน / เวลาที่สร้าง</th>
                                     <th class="text-center whitespace-nowrap">จัดการข้อมูล</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($data_list as $ul) --}}
+                                @foreach ($data_list as $ul)
                                 <tr class="intro-x">
                                     <td >
-                                        {{-- <div> {{$ul->username}} </div> --}}
+                                        <div> {{$ul->prefix_name}} {{$ul->first_name}} {{$ul->last_name}} </div>
                                     </td>
                                     <td >
-                                        {{-- <div> {{$ul->firstname}} {{$ul->last_name}} </div> --}}
+                                        <div> {{$ul->address}} </div>
                                     </td>
                                     <td>
-                                        {{-- <div> {{$ul->role}} </div> --}}
+                                        <div> {{ \Carbon\Carbon::parse($ul->created_at)->format('d-m-Y H:i') }} </div>
                                     </td>
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
-                                            {{-- @if ($ul->role != 'super admin')
                                             <a class="flex items-center mr-3" href="javascript:;" data-tw-toggle="modal" data-tw-target="#edit-modal-user{{$ul->id}}" ><i data-lucide="check-square" class="w-4 h-4 mr-1"></i>Edit</a>
                                             <div class="text-center"> <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-modal-user-{{$ul->id}}" class="btn btn-outline-danger"> Delete</a> </div> <!-- END: Modal Toggle -->
-                                            @endif --}}
                                         </div>
                                     </td>
                                 </tr>
-                                {{-- @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -176,7 +174,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="modal-header">
                             <h2 class="font-medium text-base mr-auto">เพิ่มข้อมูลพนักงาน</h2>
                         </div>
-                        <form action="{{url('/company/create')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{url('/Employee/create')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                         <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
                             
