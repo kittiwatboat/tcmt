@@ -124,10 +124,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($data_list as $ul) --}}
+                                @php
+                                    $data_list = DB::table('tb_employee')->get();
+                                @endphp
+                                @foreach ($data_list as $ul)
+
                                 <tr class="intro-x">
                                     <td >
-                                        {{-- <div> {{$ul->username}} </div> --}}
+                                        <div> {{$ul->first_name}} {{$ul->last_name}}</div>
                                     </td>
                                     <td >
                                         {{-- <div> {{$ul->firstname}} {{$ul->last_name}} </div> --}}
@@ -144,7 +148,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                         </div>
                                     </td>
                                 </tr>
-                                {{-- @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -176,15 +180,15 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="modal-header">
                             <h2 class="font-medium text-base mr-auto">เพิ่มข้อมูลพนักงาน</h2>
                         </div>
-                        <form action="{{url('/company/create')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{url('/Employee/create')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                         <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
-                            
+
                             {{-- <div class="intro-y col-span-12 sm:col-span-6">
                                 <label for="update-profile-form-9" class="form-label">คำนำหน้าชื่อ</label>
                                 <input class="form-control" id="name" type="text" name="name" placeholder="คำนำหน้าชื่อ" value="{{old('name')}}" >
                             </div> --}}
-                            
+
                             {{-- <div class="intro-y col-span-12 sm:col-span-6">
                                 <label class="form-label">Price</label>
                                 <div class="sm:grid grid-cols-3 gap-2">
@@ -207,33 +211,33 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="intro-y col-span-12 sm:col-span-6">
                                     <label for="input-wizard-1" class="form-label">รูป/บัตรประชาชนพนักงาน</label>
                                     <input  class="form-control" id="image" name="image"
-                                    type="file" data-default-file="" accept="image/*" />      
+                                    type="file" data-default-file="" accept="image/*" />
                                 </div>
                             </div>
 
                             <div class="intro-y col-span-12">
                                 <label class="form-label">ชื่อ-นามสกุล</label>
                                 <div class="grid grid-cols-12 gap-2">
-                                    <select class="form-select sm:mr-2 col-span-4" name="prefix_name" id="prefix_name" value="{{old('prefix_name')}}" data-placeholder="คำนำหน้าชื่อ" aria-label="Default select example"> 
+                                    <select class="form-select sm:mr-2 col-span-4" name="prefix_name" id="prefix_name" value="{{old('prefix_name')}}" data-placeholder="คำนำหน้าชื่อ" aria-label="Default select example">
                                         <option selected disabled>คำนำหน้า</option>
                                         <option value="นาย">นาย</option>
                                         <option value="นาง">นาง</option>
                                         <option value="นางสาว">นางสาว</option>
                                     </select>
-                                    <input class="form-control col-span-4" type="text" id="first_name" name="first_name" placeholder="ชื่อพนักงาน" aria-label="default input inline 2" value="{{old('first_name')}}"> 
-                                    <input class="form-control col-span-4" type="text" id="last_name" name="last_name" placeholder="นามสกุลพนักงาน" aria-label="default input inline 3" value="{{old('last_name')}}"> 
-                                </div> 
+                                    <input class="form-control col-span-4" type="text" id="first_name" name="first_name" placeholder="ชื่อพนักงาน" aria-label="default input inline 2" value="{{old('first_name')}}">
+                                    <input class="form-control col-span-4" type="text" id="last_name" name="last_name" placeholder="นามสกุลพนักงาน" aria-label="default input inline 3" value="{{old('last_name')}}">
+                                </div>
                             </div>
-                            
+
                             {{-- <div class="intro-y col-span-12 sm:col-span-6">
                                 <label for="input-wizard-3" class="form-label">คำนำหน้าชื่อ</label>
                                 <select name="prefixname" id="prefixname" class="form-control" onchange="selectitem()" value="{{old('prefixname')}}">
                                     <option selected disabled>เลือกคำนำหน้าชื่อ</option>
-                                        @php $prefixname = DB::table('tb_prefix')->orderBy('prefixname', 'asc')->get(); 
+                                        @php $prefixname = DB::table('tb_prefix')->orderBy('prefixname', 'asc')->get();
                                             if($prefixname){
                                                 foreach($prefixname as $rs)
                                                 {
-                                                    @endphp                         
+                                                    @endphp
                                                     <option value="{{$rs->id}}"> {{$rs->prefixname}}</option>
                                                     @php
                                                 }
@@ -255,7 +259,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <label for="modal-form-1" class="form-label">ที่อยู่พนักงาน</label>
                                 <input class="form-control" type="text" id="address" name="address" placeholder="ที่อยู่พนักงาน" value="{{old('address')}}" >
                             </div> --}}
-                            
+
                             <div class="col-span-12">
                                 <div class="mt-3">
                                     <label for="update-profile-form-5" class="form-label">ที่อยู่พนักงาน</label>
@@ -323,7 +327,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <select data-placeholder="Select your favorite actors" name="role" class="tom-select w-full" id="crud-form-2" >
                                     <option value="admin" @if ($ul2->role == 'admin') selected @endif>admin</option>
                                     <option value="viewer" @if ($ul2->role == 'viewer') selected @endif>viewer</option>
-                                    
+
                                 </select>
                             </div>
                         </div>

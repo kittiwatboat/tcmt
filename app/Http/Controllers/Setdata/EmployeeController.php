@@ -9,23 +9,24 @@ use App\Models\Setdata\TB_Employee;
 class EmployeeController extends Controller
 {
     public function index(){
-        // $data_list=Data::get(); เชื่อมฐานข้อมูล
+        $data_list=TB_Employee::get(); //เชื่อมฐานข้อมูล
+        // dd($data_list);
         return view('admin.employee.index',[
-            // 'data_list'=>$data_list
+            'data_list'=>$data_list
         ]);
     }
     public function create(Request $request){
         $employee=new TB_Employee;
         $employee->image = $request->image;
         $employee->prefix_name = $request->prefix_name;
-        $employee->firstname = $request->firstname;
-        $employee->lastname = $request->lastname;
+        $employee->first_name = $request->first_name;
+        $employee->last_name = $request->last_name;
         $employee->address = $request->address;
         $employee->employee_ID = $request->employee_ID;
         $employee->scan_code = $request->scan_code;
         $employee->bank = $request->bank;
         $employee->bank_No = $request->bank_No;
         $employee->save();
-        return redirect('admin.employee')->with('save_success','ทำการบันทึกสำเร็จ');
+        return redirect('/Employee')->with('save_success','ทำการบันทึกสำเร็จ');
     }
 }
