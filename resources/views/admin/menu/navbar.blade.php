@@ -11,7 +11,7 @@
                 <div class="side-menu__title"> Admin </div>
             </a>
         </li>
-        
+
         <li>
             <a href="javascript:;" class="side-menu {{request()->is('Company') || request()->is('Employee') || request()->is('Period') ? 'side-menu--active' : ''}}">
                 <div class="side-menu__icon"><i data-lucide="archive"></i> </div>
@@ -19,8 +19,8 @@
                     ตั้งค่าข้อมูล
                     <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                 </div>
-            </a>  
-            <ul>
+            </a>
+            <ul class="{{request()->is('Company')||request()->is('Employee')||request()->is('Period') ? 'side-menu__sub-open' : ''}}">
                 <li >
                     <a href="/Company" class="side-menu {{request()->is('Company') ? 'side-menu--active' : ''}}">
                         <div class="side-menu__icon">
@@ -38,7 +38,7 @@
                                 <path d="M8.4 7.2a.6.6 0 0 0 0 1.2h7.2a.6.6 0 1 0 0-1.2H8.4Zm-.6 3a.6.6 0 0 1 .6-.6h7.2a.6.6 0 1 1 0 1.2H8.4a.6.6 0 0 1-.6-.6Zm.6 1.8a.6.6 0 1 0 0 1.2h7.2a.6.6 0 1 0 0-1.2H8.4Zm0 2.4a.6.6 0 1 0 0 1.2H12a.6.6 0 1 0 0-1.2H8.4Z"></path>
                                 <path d="M4.8 4.8a2.4 2.4 0 0 1 2.4-2.4h9.6a2.4 2.4 0 0 1 2.4 2.4v14.4a2.4 2.4 0 0 1-2.4 2.4H7.2a2.4 2.4 0 0 1-2.4-2.4V4.8Zm12-1.2H7.2A1.2 1.2 0 0 0 6 4.8v14.4a1.2 1.2 0 0 0 1.2 1.2h9.6a1.2 1.2 0 0 0 1.2-1.2V4.8a1.2 1.2 0 0 0-1.2-1.2Z"></path>
                                 </svg> -->
-                            <i data-lucide="edit"></i> 
+                            <i data-lucide="edit"></i>
                         </div>
                         <div class="side-menu__title"> ข้อมูลพนักงาน </div>
                     </a>
@@ -48,11 +48,11 @@
                                 <path d="M8.4 7.2a.6.6 0 0 0 0 1.2h7.2a.6.6 0 1 0 0-1.2H8.4Zm-.6 3a.6.6 0 0 1 .6-.6h7.2a.6.6 0 1 1 0 1.2H8.4a.6.6 0 0 1-.6-.6Zm.6 1.8a.6.6 0 1 0 0 1.2h7.2a.6.6 0 1 0 0-1.2H8.4Zm0 2.4a.6.6 0 1 0 0 1.2H12a.6.6 0 1 0 0-1.2H8.4Z"></path>
                                 <path d="M4.8 4.8a2.4 2.4 0 0 1 2.4-2.4h9.6a2.4 2.4 0 0 1 2.4 2.4v14.4a2.4 2.4 0 0 1-2.4 2.4H7.2a2.4 2.4 0 0 1-2.4-2.4V4.8Zm12-1.2H7.2A1.2 1.2 0 0 0 6 4.8v14.4a1.2 1.2 0 0 0 1.2 1.2h9.6a1.2 1.2 0 0 0 1.2-1.2V4.8a1.2 1.2 0 0 0-1.2-1.2Z"></path>
                                 </svg> -->
-                            <i data-lucide="edit"></i> 
+                            <i data-lucide="edit"></i>
                         </div>
                         <div class="side-menu__title"> ข้อมูลช่วงเวลา </div>
                     </a>
-                </li>    
+                </li>
             </ul>
         </li>
         <li>
