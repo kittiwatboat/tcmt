@@ -182,7 +182,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             
                             <div class="intro-y col-span-12 sm:col-span-6">
                                 <label for="update-profile-form-9" class="form-label">วันที่</label>
-                                <input type="date" class="form-control" id="Detail_dateimg1" name="Detail_dateimg1">
+                                <input class="form-control" id="date" type="date" name="date" placeholder="วันที่" value="{{old('date')}}" >
                             </div>
                             <div class="grid grid-cols-7 gap-y-5 mt-5">
                                 <div class="intro-y col-span-12 sm:col-span-6">
@@ -567,7 +567,7 @@ License: You must have a valid license purchased only from themeforest(the above
         @if (session('success'))
         <script>
             Swal.fire({
-            position: "top-end",
+            // position: "top-end",
             icon: "success",
             title: "Login สำเร็จ",
             showConfirmButton: false,
@@ -581,7 +581,7 @@ License: You must have a valid license purchased only from themeforest(the above
         @endphp
         <script>
             Swal.fire({
-            position: "top-end",
+            // position: "top-end",
             icon: "success",
             title: "{{$save_text}}",
             showConfirmButton: false,

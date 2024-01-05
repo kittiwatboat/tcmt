@@ -13,7 +13,7 @@
         </li>
         
         <li>
-            <a href="javascript:;" class="side-menu side-menu--active">
+            <a href="javascript:;" class="side-menu {{request()->is('Company') || request()->is('Employee') || request()->is('Period') ? 'side-menu--active' : ''}}">
                 <div class="side-menu__icon"><i data-lucide="archive"></i> </div>
                 <div class="side-menu__title">
                     ตั้งค่าข้อมูล

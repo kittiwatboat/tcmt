@@ -57,9 +57,16 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="grid grid-cols-12 gap-6 mt-5">
                     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
                              <!-- BEGIN: Super Large Modal Toggle -->
-                             <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#superlarge-modal-size-preview" class="btn btn-primary mr-1 mb-2">เพิ่มข้อมูลพนักงาน</a>
+                             
+                        <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+                            <div class="w-56 relative text-slate-500">
+                                <input type="text" id="search" class="form-control w-56 box pr-10" value="{{$search}}" placeholder="Search..." onchange="document.location.href=`{{url('/Employee')}}?search=`+document.getElementById('search').value">
+                                <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search" onclick="document.location.href=`{{url('/Employee')}}?search=`+document.getElementById('search').value"></i>
+                            </div>
+                        </div>
+                        {{-- <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#superlarge-modal-size-preview" class="btn btn-primary mr-1 mb-2">เพิ่มข้อมูลพนักงาน</a> --}}
                              <!-- END: Super Large Modal Toggle -->
-                        {{-- <a class="btn btn-primary shadow-md mr-2" href="{{url('/admin/add_user')}}">Add New Admin</a> --}}
+                        {{-- <a class="btn btn-primary shadow-md mr-2" href="{{url('/admin/add')}}">Add New Admin</a> --}}
                         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                             <div id="modal-datepicker" class="p-5">
                                 <div class="preview">
@@ -105,12 +112,14 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
 
                         <div class="hidden md:block mx-auto text-slate-500"></div>
-                        <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+                        <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#superlarge-modal-size-preview" class="btn btn-primary mr-1 mb-2">เพิ่มข้อมูลพนักงาน</a>
+
+                        {{-- <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                             <div class="w-56 relative text-slate-500">
-                                <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
-                                <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
+                                <input type="text" id="search" class="form-control w-56 box pr-10" value="{{$search}}" placeholder="Search..." onchange="document.location.href=`{{url('/Employee')}}?search=`+document.getElementById('search').value">
+                                <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search" onclick="document.location.href=`{{url('/Employee')}}?search=`+document.getElementById('search').value"></i>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <!-- BEGIN: Data List -->
                     <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
@@ -120,25 +129,29 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <th class="whitespace-nowrap">ชื่อพนักงาน</th>
                                     <th class="whitespace-nowrap">ที่อยู่พนักงาน</th>
                                     <th class="whitespace-nowrap">วัน / เวลาที่สร้าง</th>
+                                    <th class="whitespace-nowrap">วัน / เวลาที่แก้ไข</th>
                                     <th class="text-center whitespace-nowrap">จัดการข้อมูล</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data_list as $ul)
+                                @foreach ($data_list as $data)
                                 <tr class="intro-x">
                                     <td >
-                                        <div> {{$ul->prefix_name}} {{$ul->first_name}} {{$ul->last_name}} </div>
+                                        <div> {{$data->prefix_name}} {{$data->first_name}} {{$data->last_name}} </div>
                                     </td>
                                     <td >
-                                        <div> {{$ul->address}} </div>
+                                        <div> {{$data->address}} </div>
                                     </td>
                                     <td>
-                                        <div> {{ \Carbon\Carbon::parse($ul->created_at)->format('d-m-Y H:i') }} </div>
+                                        <div> {{ \Carbon\Carbon::parse($data->created_at)->format('d-m-Y H:i') }} </div>
+                                    </td>
+                                    <td>
+                                        <div> {{ \Carbon\Carbon::parse($data->updated_at)->format('d-m-Y H:i') }} </div>
                                     </td>
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
-                                            <a class="flex items-center mr-3" href="javascript:;" data-tw-toggle="modal" data-tw-target="#edit-modal-user{{$ul->id}}" ><i data-lucide="check-square" class="w-4 h-4 mr-1"></i>Edit</a>
-                                            <div class="text-center"> <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-modal-user-{{$ul->id}}" class="btn btn-outline-danger"> Delete</a> </div> <!-- END: Modal Toggle -->
+                                            <a class="flex items-center mr-3" href="javascript:;" data-tw-toggle="modal" data-tw-target="#edit-modal-user{{$data->id}}" ><i data-lucide="check-square" class="w-4 h-4 mr-1"></i>Edit</a>
+                                            <div class="text-center"> <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-modal-user-{{$data->id}}" class="btn btn-outline-danger"> Delete</a> </div> <!-- END: Modal Toggle -->
                                         </div>
                                     </td>
                                 </tr>
@@ -178,29 +191,6 @@ License: You must have a valid license purchased only from themeforest(the above
                             @csrf
                         <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
 
-                            {{-- <div class="intro-y col-span-12 sm:col-span-6">
-                                <label for="update-profile-form-9" class="form-label">คำนำหน้าชื่อ</label>
-                                <input class="form-control" id="name" type="text" name="name" placeholder="คำนำหน้าชื่อ" value="{{old('name')}}" >
-                            </div> --}}
-
-                            {{-- <div class="intro-y col-span-12 sm:col-span-6">
-                                <label class="form-label">Price</label>
-                                <div class="sm:grid grid-cols-3 gap-2">
-                                    <div class="input-group">
-                                        <div id="input-group-3" class="input-group-text">Unit</div>
-                                        <input type="text" class="form-control" placeholder="Unit" aria-describedby="input-group-3">
-                                    </div>
-                                    <div class="input-group mt-2 sm:mt-0">
-                                        <div id="input-group-4" class="input-group-text">Wholesale</div>
-                                        <input type="text" class="form-control" placeholder="Wholesale" aria-describedby="input-group-4">
-                                    </div>
-                                    <div class="input-group mt-2 sm:mt-0">
-                                        <div id="input-group-5" class="input-group-text">Bulk</div>
-                                        <input type="text" class="form-control" placeholder="Bulk" aria-describedby="input-group-5">
-                                    </div>
-                                </div>
-                            </div> --}}
-
                             <div class="col-span-12">
                                 <div class="intro-y col-span-12 sm:col-span-6">
                                     <label for="input-wizard-1" class="form-label">รูป/บัตรประชาชนพนักงาน</label>
@@ -209,7 +199,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                             </div>
 
-                            <div class="intro-y col-span-12">
+                            <div class="col-span-12">
                                 <label class="form-label">ชื่อ-นามสกุล</label>
                                 <div class="grid grid-cols-12 gap-2">
                                     <select class="form-select sm:mr-2 col-span-4" name="prefix_name" id="prefix_name" value="{{old('prefix_name')}}" data-placeholder="คำนำหน้าชื่อ" aria-label="Default select example">
@@ -222,37 +212,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <input class="form-control col-span-4" type="text" id="last_name" name="last_name" placeholder="นามสกุลพนักงาน" aria-label="default input inline 3" value="{{old('last_name')}}">
                                 </div>
                             </div>
-
-                            {{-- <div class="intro-y col-span-12 sm:col-span-6">
-                                <label for="input-wizard-3" class="form-label">คำนำหน้าชื่อ</label>
-                                <select name="prefixname" id="prefixname" class="form-control" onchange="selectitem()" value="{{old('prefixname')}}">
-                                    <option selected disabled>เลือกคำนำหน้าชื่อ</option>
-                                        @php $prefixname = DB::table('tb_prefix')->orderBy('prefixname', 'asc')->get();
-                                            if($prefixname){
-                                                foreach($prefixname as $rs)
-                                                {
-                                                    @endphp
-                                                    <option value="{{$rs->id}}"> {{$rs->prefixname}}</option>
-                                                    @php
-                                                }
-                                            }
-                                        @endphp
-                                </select>
-                            </div> --}}
-
-                            {{-- <div class="intro-y col-span-12 sm:col-span-6">
-                                <label for="update-profile-form-9" class="form-label">ชื่อพนักงาน</label>
-                                <input class="form-control" id="name" type="text" name="name" placeholder="ชื่อพนักงาน" value="{{old('name')}}" >
-                            </div>
-                            <div class="intro-y col-span-12 sm:col-span-6">
-                                <label for="update-profile-form-9" class="form-label">นามสกุลพนักงาน</label>
-                                <input class="form-control" id="name" type="text" name="name" placeholder="ชื่อพนักงาน" value="{{old('name')}}" >
-                            </div> --}}
-
-                            {{-- <div class="col-span-12">
-                                <label for="modal-form-1" class="form-label">ที่อยู่พนักงาน</label>
-                                <input class="form-control" type="text" id="address" name="address" placeholder="ที่อยู่พนักงาน" value="{{old('address')}}" >
-                            </div> --}}
 
                             <div class="col-span-12">
                                 <div class="mt-3">
@@ -276,6 +235,10 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <label for="modal-form-4" class="form-label">เลขบัญชีธนาคาร</label>
                                 <input id="modal-form-4" name="bank_No" type="text" class="form-control" placeholder="เลขบัญชีธนาคาร" value="{{old('bank_No')}}">
                             </div>
+                            <div class="col-span-12 sm:col-span-6">
+                                <label for="modal-form-4" class="form-label">ค่าแรงต่อชั่วโมง</label>
+                                <input id="modal-form-4" name="rate" type="text" class="form-control" placeholder="ค่าแรงต่อชั่วโมง" value="{{old('rate')}}">
+                            </div>
 
                         </div>
 
@@ -289,40 +252,65 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
         <!-- END: Create Admin Modal -->
         <!-- BEGIN: Create Admin Modal -->
-        {{-- @foreach ($data_list as $ul2)
-        <div id="edit-modal-user{{$ul2->id}}" class="modal" tabindex="-1" aria-hidden="true">
+        @foreach ($data_list as $data)
+        <div id="edit-modal-user{{$data->id}}" class="modal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                         <div class="modal-header">
-                            <h2 class="font-medium text-base mr-auto">Edit admin <b>{{$ul2->username}}</b></h2>
+                            <h2 class="font-medium text-base mr-auto">แก้ไขข้อมูลพนักงาน<b>{{$data->prefix_name}} {{$data->first_name}} {{$data->last_name}}</b></h2>
                         </div>
-                        <form action="{{url('/admin/update_user')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{url('/Employee/update')}}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input type="hidden" name="id" value="{{$ul2->id}}">
+                            <input type="hidden" name="id" value="{{$data->id}}">
                         <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-1" class="form-label">Username</label>
-                                <input id="modal-form-1" name="username" type="text" class="form-control" placeholder="ตัวอย่าง admin_name" value="{{$ul2->username}}" required>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-2" class="form-label">scan_code <span style="color: red">*ถ้าไม่ได้เปลี่ยน scan_code ไม่จำเป็นต้องใส่</span></label>
-                                <input id="modal-form-2" name="scan_code" type="scan_code" class="form-control" placeholder="ตัวอักษร a-z,0-9 ต้องมีทั้งตัวพิมพ์เล็กและตัวพิมพ์ใหญ่ ขั้นต่ำ 8 ตัว" min="8" value="">
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-3" class="form-label">First name</label>
-                                <input id="modal-form-3" name="firstname" type="text" class="form-control" placeholder="ชื่อ" value="{{$ul2->firstname}}" required>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">Last name</label>
-                                <input id="modal-form-4" name="last_name" type="text" class="form-control" placeholder="นามสกุล" value="{{$ul2->last_name}}" required>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label class="form-label">Role</label>
-                                <select data-placeholder="Select your favorite actors" name="role" class="tom-select w-full" id="crud-form-2" >
-                                    <option value="admin" @if ($ul2->role == 'admin') selected @endif>admin</option>
-                                    <option value="viewer" @if ($ul2->role == 'viewer') selected @endif>viewer</option>
 
-                                </select>
+                            <div class="col-span-12">
+                                <div class="intro-y col-span-12 sm:col-span-6">
+                                    <label for="input-wizard-1" class="form-label">รูป/บัตรประชาชนพนักงาน</label>
+                                    <input  class="form-control" id="image" name="image"
+                                    type="file" data-default-file="" accept="image/*" />
+                                </div>
+                            </div>
+
+                            <div class="intro-y col-span-12">
+                                <label class="form-label">ชื่อ-นามสกุล</label>
+                                <div class="grid grid-cols-12 gap-2">
+                                    <select class="form-select sm:mr-2 col-span-4" name="prefix_name" id="prefix_name" value="{{$data->prefix_name}}" data-placeholder="คำนำหน้าชื่อ" aria-label="Default select example">
+                                        <option selected disabled>คำนำหน้า</option>
+                                        <option value="นาย">นาย</option>
+                                        <option value="นาง">นาง</option>
+                                        <option value="นางสาว">นางสาว</option>
+                                    </select>
+                                    <input class="form-control col-span-4" type="text" id="first_name" name="first_name" placeholder="ชื่อพนักงาน" aria-label="default input inline 2" value="{{$data->first_name}}">
+                                    <input class="form-control col-span-4" type="text" id="last_name" name="last_name" placeholder="นามสกุลพนักงาน" aria-label="default input inline 3" value="{{$data->last_name}}">
+                                </div>
+                            </div>
+
+                            <div class="col-span-12">
+                                <div class="mt-3">
+                                    <label for="update-profile-form-5" class="form-label">ที่อยู่พนักงาน</label>
+                                    <textarea class="form-control" type="text" id="address" name="address" placeholder="ที่อยู่พนักงาน" value="{{$data->address}}"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-span-12 sm:col-span-6">
+                                <label for="modal-form-1" class="form-label">รหัสพนักงาน</label>
+                                <input id="modal-form-1" name="employee_ID" type="text" class="form-control" placeholder="รหัสพนักงาน" value="{{$data->employee_ID}}" required>
+                            </div>
+                            <div class="col-span-12 sm:col-span-6">
+                                <label for="modal-form-2" class="form-label">รหัสสแกน</label>
+                                <input id="modal-form-2" name="scan_code" type="text" class="form-control" placeholder="รหัสสแกน" value="{{$data->scan_code}}" placeholder="ตัวอักษร a-z,0-9 ต้องมีทั้งตัวพิมพ์เล็กและตัวพิมพ์ใหญ่ ขั้นต่ำ 8 ตัว" min="8" required>
+                            </div>
+                            <div class="col-span-12 sm:col-span-6">
+                                <label for="modal-form-3" class="form-label">ธนาคาร</label>
+                                <input id="modal-form-3" name="bank" type="text" class="form-control" placeholder="ธนาคาร" value="{{$data->bank}}">
+                            </div>
+                            <div class="col-span-12 sm:col-span-6">
+                                <label for="modal-form-4" class="form-label">เลขบัญชีธนาคาร</label>
+                                <input id="modal-form-4" name="bank_No" type="text" class="form-control" placeholder="เลขบัญชีธนาคาร" value="{{$data->bank_No}}">
+                            </div>
+                            <div class="col-span-12 sm:col-span-6">
+                                <label for="modal-form-4" class="form-label">ค่าแรงต่อชั่วโมง</label>
+                                <input id="modal-form-4" name="rate" type="text" class="form-control" placeholder="ค่าแรงต่อชั่วโมง" value="{{$data->rate}}">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -333,26 +321,26 @@ License: You must have a valid license purchased only from themeforest(the above
                     </div>
             </div>
         </div>
-        @endforeach --}}
+        @endforeach
         <!-- END: Create Admin Modal -->
         <!-- BEGIN: Modal Content -->
-        {{-- @foreach ($data_list as $del_user)
-        <div id="delete-modal-user-{{$del_user->id}}" class="modal" tabindex="-1" aria-hidden="true">
+        @foreach ($data_list as $del_data)
+        <div id="delete-modal-user-{{$del_data->id}}" class="modal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body p-0">
                         <div class="p-5 text-center"> <i data-lucide="x-circle" class="w-16 h-16 text-danger mx-auto mt-3"></i>
                             <div class="text-3xl mt-5">Are you sure?</div>
-                            <div class="text-slate-500 mt-2">Do you really want to delete {{$del_user->role}} {{$del_user->username}}? <br>This process cannot be undone.</div>
+                            <div class="text-slate-500 mt-2">Do you really want to delete {{$del_data->prefix_name}} {{$del_data->first_name}} {{$del_data->last_name}}? <br>This process cannot be undone.</div>
                         </div>
                         <div class="px-5 pb-8 text-center">
                             <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
-                            <a href="/admin/delete_user/{{$del_user->id}}" class="btn btn-danger w-24">Delete</a> </div>
+                            <a href="/Employee/delete/{{$del_data->id}}" class="btn btn-danger w-24">Delete</a> </div>
                     </div>
                 </div>
             </div>
         </div>
-        @endforeach --}}
+        @endforeach
         <!-- END: Modal Content -->
 
         <!-- BEGIN: JS Assets-->
@@ -384,7 +372,7 @@ License: You must have a valid license purchased only from themeforest(the above
         @if (session('success'))
         <script>
             Swal.fire({
-            position: "top-end",
+            // position: "top-end",
             icon: "success",
             title: "Login สำเร็จ",
             showConfirmButton: false,
@@ -398,7 +386,7 @@ License: You must have a valid license purchased only from themeforest(the above
         @endphp
         <script>
             Swal.fire({
-            position: "top-end",
+            // position: "top-end",
             icon: "success",
             title: "{{$save_text}}",
             showConfirmButton: false,

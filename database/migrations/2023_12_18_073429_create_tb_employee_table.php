@@ -24,6 +24,7 @@ class CreateTbEmployeeTable extends Migration
             $table->text('scan_code')->nullable();                      //รหัสสแกนนิ้ว
             $table->text('bank')->nullable();                           //ธนาคาร
             $table->text('bank_No')->nullable();                        //เลขบัญชี
+            $table->text('rate')->nullable();                           //เรทค่าแรงต่อชั่วโมง
             $table->timestamps();
         });
     }

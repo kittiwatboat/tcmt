@@ -15,6 +15,10 @@ class CreateTbCompany extends Migration
     {
         Schema::create('tb_company', function (Blueprint $table) {
             $table->id();
+            $table->text('image')->nullable();                   //รูปบริษัท
+            $table->text('name')->nullable();                    //ชื่อบริษัท
+            $table->text('companyaddressthai')->nullable();      //ที่อยู่บริษัทไทย
+            $table->text('companyaddresseng')->nullable();       //ที่อยู่บริษัทอังกฤษ
             $table->timestamps();
         });
     }

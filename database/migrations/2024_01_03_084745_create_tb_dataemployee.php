@@ -15,6 +15,7 @@ class CreateTbDataemployee extends Migration
     {
         Schema::create('tb_dataemployee', function (Blueprint $table) {
             $table->id();
+            $table->text('date')->nullable();                           //วันที่
             $table->text('image')->nullable();                          //รูปพนักงาน
             $table->text('prefix_name')->nullable();                    //คำนำหน้าชื่อ
             $table->text('first_name')->nullable();                     //ชื่อ
@@ -24,6 +25,7 @@ class CreateTbDataemployee extends Migration
             $table->text('scan_code')->nullable();                      //รหัสสแกนนิ้ว
             $table->text('bank')->nullable();                           //ธนาคาร
             $table->text('bank_No')->nullable();                        //เลขบัญชี
+            $table->text('rate')->nullable();                           //เรทค่าแรงต่อชั่วโมง
             $table->text('job_No')->nullable();
             $table->text('WO_No')->nullable();
             $table->text('Period')->nullable();                         //ช่วงกะ
