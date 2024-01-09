@@ -184,7 +184,6 @@ License: You must have a valid license purchased only from themeforest(the above
                             @csrf
                         <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
 
-<<<<<<< HEAD:resources/views/admin/dataemployee/index.blade.php
                             <div class="intro-y col-span-12 sm:col-span-4">
                                 <label for="update-profile-form-9" class="form-label">วันที่</label>
                                 <input class="form-control" id="date" type="date" name="date" placeholder="วันที่" value="{{old('date')}}" >
@@ -226,17 +225,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <div class="mt-3">
                                     <label for="update-profile-form-5" class="form-label">ที่อยู่พนักงาน</label>
                                     <textarea class="form-control" type="text" id="address" name="address" placeholder="ที่อยู่พนักงาน" value="{{old('address')}}"></textarea>
-=======
-                            <div class="intro-y col-span-12 sm:col-span-6">
-                                <label for="update-profile-form-9" class="form-label">วันที่</label>
-                                <input class="form-control" id="date" type="date" name="date" placeholder="วันที่" value="{{old('date')}}" >
-                            </div>
-                            <div class="col-span-6">
-                                <div class="intro-y col-span-12 sm:col-span-6">
-                                    <label for="input-wizard-1" class="form-label">รูป</label>
-                                    <input  class="form-control" id="Detail_imgright1" name="Detail_imgright1"
-                                    type="file" data-default-file="" accept="image/*" />
->>>>>>> 556d2f94eb42781df59647e133438225a5f46405:resources/views/admin/data/index.blade.php
                                 </div>
                             </div>
                             <div class="col-span-12 sm:col-span-6">
@@ -255,7 +243,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <label for="modal-form-4" class="form-label">เลขบัญชีธนาคาร</label>
                                 <input id="modal-form-4" name="bank_No" type="text" class="form-control" placeholder="เลขบัญชีธนาคาร" value="{{old('bank_No')}}">
                             </div>
-<<<<<<< HEAD:resources/views/admin/dataemployee/index.blade.php
                             {{-- เข้ากะ --}}
                             
                             <div class="intro-y col-span-12 sm:col-span-6">
@@ -321,41 +308,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <label for="update-profile-form-9" class="form-label">เวลาออกกะ</label>
                                 <input class="form-control" id="leavetime" type="time" name="leavetime" placeholder="เวลาออกกะ" value="">
                             </div> --}}
-=======
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-3" class="form-label">JOB NO.</label>
-                                <input id="modal-form-3" name="firstname" type="text" class="form-control" placeholder="JOB NO." value="{{old('firstname')}}" required>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">WO NO.</label>
-                                <input id="modal-form-4" name="lastname" type="text" class="form-control" placeholder="WO NO." value="{{old('lastname')}}" required>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">ที่อยู่</label>
-                                <input id="modal-form-4" name="lastname" type="text" class="form-control" placeholder="ที่อยู่" value="{{old('lastname')}}" required>
-                            </div>
-                            <br>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-3" class="form-label">เลขบัญชี</label>
-                                <input id="modal-form-3" name="firstname" type="text" class="form-control" placeholder="เลขบัญชี" value="{{old('firstname')}}" required>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">ธนาคาร</label>
-                                <input id="modal-form-4" name="lastname" type="text" class="form-control" placeholder="ธนาคาร" value="{{old('lastname')}}" required>
-                            </div>
-
-                            {{-- เข้ากะ --}}
-                                        <div class="col-span-12 sm:col-span-6">
-                                            <label for="modal-form-4" class="form-label">เวลาเข้ากะ</label>
-                                            <select class="tom-select w-full" type="text" id="Detail_refer" name="Detail_refer" onchange="selectitem()">
-                                                <option>เลือกเวลาเข้ากะ</option>
-                                                <option>A1 08.00 - 17.00</option>
-                                                <option>A2 13.00 - 21.00</option>
-                                                <option>A1 18.00 - 03.00</option>
-                                            </select>
-                                        </div>
-
->>>>>>> 556d2f94eb42781df59647e133438225a5f46405:resources/views/admin/data/index.blade.php
 
                             {{-- <div class="mb-3">
                                 <ul class="list-group list-group-flush">
@@ -511,14 +463,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </select>
                                 </div>
                             </div>
-<<<<<<< HEAD:resources/views/admin/dataemployee/index.blade.php
                             
                             {{-- <div class="col-span-12 sm:col-span-6">
-=======
-                            <br>
-
-                            <div class="col-span-12 sm:col-span-6">
->>>>>>> 556d2f94eb42781df59647e133438225a5f46405:resources/views/admin/data/index.blade.php
                                 <label for="modal-form-4" class="form-label">ผ่าเที่ยง</label>
                                 <select class="tom-select w-full" type="text" id="Detail_refer" name="Detail_refer" onchange="selectitem()">
                                     <option>เลือกจำนวนชั่วโมง</option>
@@ -573,7 +519,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <option>7</option>
                                     <option>8</option>
                                 </select>
-<<<<<<< HEAD:resources/views/admin/dataemployee/index.blade.php
                             </div> --}}
                             
                             <div class="col-span-12">
@@ -585,11 +530,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                             </div>
                             {{-- <div class="col-span-12 sm:col-span-6">
-=======
-                            </div>
-
-                            <div class="col-span-12 sm:col-span-6">
->>>>>>> 556d2f94eb42781df59647e133438225a5f46405:resources/views/admin/data/index.blade.php
                                 <label for="modal-form-3" class="form-label">เบี้ยเลี้ยง</label>
                                 <input id="modal-form-3" name="firstname" type="text" class="form-control" placeholder="เบี้ยเลี้ยง" value="{{old('firstname')}}" required>
                             </div>
@@ -724,7 +664,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <input id="bank" name="bank" type="text" class="form-control" placeholder="ธนาคาร" value="{{$data->bank}}">
                             </div>
                             <div class="col-span-12 sm:col-span-6">
-<<<<<<< HEAD:resources/views/admin/dataemployee/index.blade.php
                                 <label for="modal-form-4" class="form-label">เลขบัญชีธนาคาร</label>
                                 <input id="bank_No" name="bank_No" type="text" class="form-control" placeholder="เลขบัญชีธนาคาร" value="{{$data->bank_No}}">
                             </div>
@@ -744,13 +683,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                         }
                                     }
                                     @endphp
-=======
-                                <label class="form-label">Role</label>
-                                <select data-placeholder="Select your favorite actors" name="role" class="tom-select w-full" id="crud-form-2" >
-                                    <option value="admin" @if ($ul2->role == 'admin') selected @endif>admin</option>
-                                    <option value="viewer" @if ($ul2->role == 'viewer') selected @endif>viewer</option>
-
->>>>>>> 556d2f94eb42781df59647e133438225a5f46405:resources/views/admin/data/index.blade.php
                                 </select>
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-6">
