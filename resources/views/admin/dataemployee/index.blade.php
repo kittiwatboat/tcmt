@@ -633,6 +633,8 @@ License: You must have a valid license purchased only from themeforest(the above
                             <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1">Cancel</button>
                             <button type="submit" class="btn btn-primary w-20">Save</button>
                         </div>
+                    </div>
+
                     </form>
                 </div>
             </div>
