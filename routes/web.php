@@ -76,3 +76,5 @@ Route::get('/Receipt',[ReceiptController::class,'index']);
 
 Route::get('cal_salary',[SalaryController::class,'cal_salary']);
 Route::get('time_check',[SalaryController::class,'time_check']);
+
+Route::get('/salary',[SalaryController::class,'salary']);
