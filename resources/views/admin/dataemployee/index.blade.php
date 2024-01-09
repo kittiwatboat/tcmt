@@ -57,7 +57,14 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="grid grid-cols-12 gap-6 mt-5">
                     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
                              <!-- BEGIN: Super Large Modal Toggle -->
-                             <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#superlarge-modal-size-preview" class="btn btn-primary mr-1 mb-2">Add New Admin</a>
+                             
+                        <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+                            <div class="w-56 relative text-slate-500">
+                                <input type="text" id="search" class="form-control w-56 box pr-10" value="{{$search}}" placeholder="Search..." onchange="document.location.href=`{{url('/Data')}}?search=`+document.getElementById('search').value">
+                                <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search" onclick="document.location.href=`{{url('/Data')}}?search=`+document.getElementById('search').value"></i>
+                            </div>
+                        </div>
+                        {{-- <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#superlarge-modal-size-preview" class="btn btn-primary mr-1 mb-2">เพิ่มข้อมูลพนักงาน</a> --}}
                              <!-- END: Super Large Modal Toggle -->
                         {{-- <a class="btn btn-primary shadow-md mr-2" href="{{url('/Data/add')}}">Add New Admin</a> --}}
                         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
@@ -105,12 +112,14 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
 
                         <div class="hidden md:block mx-auto text-slate-500"></div>
-                        <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+                        <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#superlarge-modal-size-preview" class="btn btn-primary mr-1 mb-2">เพิ่มข้อมูลพนักงาน</a>
+
+                        {{-- <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                             <div class="w-56 relative text-slate-500">
-                                <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
-                                <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
+                                <input type="text" id="search" class="form-control w-56 box pr-10" value="{{$search}}" placeholder="Search..." onchange="document.location.href=`{{url('/Datae')}}?search=`+document.getElementById('search').value">
+                                <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search" onclick="document.location.href=`{{url('/Data')}}?search=`+document.getElementById('search').value"></i>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <!-- BEGIN: Data List -->
                     <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
@@ -141,7 +150,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </td>
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
-                                            @if ($data->role != 'super admin')
+                                            @if (auth()->user()->role != 'super admin' || auth()->user()->role != 'admin')
                                             <a class="flex items-center mr-3" href="javascript:;" data-tw-toggle="modal" data-tw-target="#edit-modal-user{{$data->id}}" ><i data-lucide="check-square" class="w-4 h-4 mr-1"></i>Edit</a>
                                             <div class="text-center"> <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-modal-user-{{$data->id}}" class="btn btn-outline-danger"> Delete</a> </div> <!-- END: Modal Toggle -->
                                             @endif
@@ -177,378 +186,185 @@ License: You must have a valid license purchased only from themeforest(the above
         <div id="superlarge-modal-size-preview" class="modal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 class="font-medium text-base mr-auto">ADD ฐานข้อมูล</h2>
-                        </div>
-                        <form action="{{url('/Data/create')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
+                    <div class="modal-header">
+                        <h2 class="font-medium text-base mr-auto">ADD ฐานข้อมูล</h2>
+                    </div>
+                    <form action="{{url('/Data/create')}}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
-
                             <div class="intro-y col-span-12 sm:col-span-4">
                                 <label for="update-profile-form-9" class="form-label">วันที่</label>
-                                <input class="form-control" id="date" type="date" name="date" placeholder="วันที่" value="{{old('date')}}" >
+                                <input class="form-control" type="date" id="date" name="date" placeholder="วันที่" value="" required>
                             </div>
                             <div class="col-span-12 sm:col-span-4">
                                 <label for="modal-form-3" class="form-label">JOB NO.</label>
-                                <input id="modal-form-3" name="firstname" type="text" class="form-control" placeholder="JOB NO." value="{{old('firstname')}}" required>
+                                <input class="form-control" type="text" id="job_No" name="job_No" placeholder="JOB NO." value="" required>
                             </div>
                             <div class="col-span-12 sm:col-span-4">
                                 <label for="modal-form-4" class="form-label">WO NO.</label>
-                                <input id="modal-form-4" name="lastname" type="text" class="form-control" placeholder="WO NO." value="{{old('lastname')}}" required>
+                                <input class="form-control" type="text" id="WO_No" name="WO_No" placeholder="WO NO." value="" required>
                             </div>
-                            {{-- <div class="col-span-12">
-                                <div class="intro-y col-span-12 sm:col-span-4">
-                                    <label for="input-wizard-1" class="form-label">รูป/บัตรประชาชนพนักงาน</label>
-                                    <input  class="form-control" id="image" name="image"
-                                    type="file" data-default-file="" accept="image/*" />
-                                </div>
-                            </div> --}}
+                        </div>                            
+                        <h2 class="modal-body intro-y text-lg font-medium mt-10 text-center">ข้อมูลพนักงาน</h2>
+                        <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
                             <div class="col-span-12">
                                 <label class="form-label">ชื่อ-นามสกุล</label>
                                 <div class="grid grid-cols-12 gap-2">
-                                    <select class="tom-select sm:mr-2 col-span-4" name="first_name" id="first_name" value="{{old('first_name')}}" data-placeholder="ชื่อพนักงาน" aria-label="Default select example">
+                                    <select class="tom-select sm:mr-2 xl:col-span-9 " id="first_name" name="first_name" data-placeholder="ชื่อพนักงาน" value="" aria-label="Default select example" required>
                                         <option selected disabled>ชื่อพนักงาน</option>
-                                        <option value="ชื่อพนักงาน1">ชื่อพนักงาน1</option>
-                                        <option value="ชื่อพนักงาน2">ชื่อพนักงาน2</option>
-                                        <option value="ชื่อพนักงาน3">ชื่อพนักงาน3</option>
+                                            @php 
+                                            $Employee = DB::table('tb_employee')->get();
+                                                if($Employee)
+                                                {
+                                                    foreach($Employee as $data_Employee1)
+                                                {
+                                                @endphp
+                                                    <option value="{{$data_Employee1->id}}"> {{$data_Employee1->prefix_name}}{{$data_Employee1->first_name}}  {{$data_Employee1->last_name}} </option>
+                                                @php
+                                                }
+                                            }
+                                            @endphp
                                     </select>
-                                    {{-- <input class="form-control col-span-4" type="text" id="first_name" name="first_name" placeholder="ชื่อพนักงาน" aria-label="default input inline 2" value="{{old('first_name')}}"> --}}
-                                    <input class="form-control col-span-4" type="text" id="last_name" name="last_name" placeholder="นามสกุลพนักงาน" aria-label="default input inline 3" value="{{old('last_name')}}">
-                                    <div class="intro-y col-span-12 sm:col-span-4">
-                                        {{-- <label for="input-wizard-1" class="form-label">รูป/บัตรประชาชนพนักงาน</label> --}}
-                                        <input  class="form-control" id="image" name="image"
-                                        type="file" data-default-file="" accept="image/*" />
+                                    <div class="intro-y col-span-12 sm:col-span-3">
+                                        <input  class="form-control" type="file" id="image" name="image" data-default-file="" accept="image/*"/>
+                                        <center>
+                                        </center>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-span-12">
                                 <div class="mt-3">
                                     <label for="update-profile-form-5" class="form-label">ที่อยู่พนักงาน</label>
-                                    <textarea class="form-control" type="text" id="address" name="address" placeholder="ที่อยู่พนักงาน" value="{{old('address')}}"></textarea>
+                                    <textarea class="form-control" type="text" id="address" name="address" placeholder="ที่อยู่พนักงาน" value=""></textarea>
+                                </div>
+                            </div>
+                            <div class="col-span-12">
+                                <label class="form-label"></label>
+                                <div class="grid grid-cols-12 gap-3">
+                                    <div class="col-span-12 col-span-3">
+                                        <label for="modal-form-4" class="form-label">รหัสพนักงาน</label>
+                                        <input class="form-control" type="text" id="employee_ID" name="employee_ID" placeholder="รหัสพนักงาน" value="">
+                                    </div>
+                                    <div class="col-span-12 col-span-3">
+                                        <label for="modal-form-4" class="form-label">รหัสสแกน</label>
+                                        <input class="form-control" type="text" id="scan_code" name="scan_code" placeholder="รหัสสแกน" value="">
+                                    </div>
+                                    <div class="col-span-12 col-span-5">
+                                        <label for="modal-form-4" class="form-label">ค่าแรงต่อชั่วโมง</label>
+                                        <input class="form-control" type="text" id="rate" name="rate" placeholder="ค่าแรงต่อชั่วโมง" value="">
+                                    </div>
+                                    <h2 class="text-lg font-medium mt-10 pl-6">บาท</h2>
                                 </div>
                             </div>
                             <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-1" class="form-label">รหัสพนักงาน</label>
-                                <input id="modal-form-1" name="employee_ID" type="text" class="form-control" placeholder="รหัสพนักงาน" value="{{old('employee_ID')}}" required>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-2" class="form-label">รหัสสแกน</label>
-                                <input id="modal-form-2" name="scan_code" type="text" class="form-control" placeholder="รหัสสแกน" value="{{old('scan_code')}}" placeholder="ตัวอักษร a-z,0-9 ต้องมีทั้งตัวพิมพ์เล็กและตัวพิมพ์ใหญ่ ขั้นต่ำ 8 ตัว" min="8" required>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-3" class="form-label">ธนาคาร</label>
-                                <input id="modal-form-3" name="bank" type="text" class="form-control" placeholder="ธนาคาร" value="{{old('bank')}}">
+                                <label for="modal-form-4" class="form-label">ธนาคาร</label>
+                                <select class="tom-select w-full" type="text" id="bank" name="bank" onchange="selectitem()" value="">
+                                    <option selected disabled>เลือกธนาคาร</option>
+                                    <option value="ธนาคารกรุงเทพ">ธนาคารกรุงเทพ</option>
+                                    <option value="ธนาคารกสิกรไทย">ธนาคารกสิกรไทย</option>
+                                    <option value="ธนาคารกรุงไทย">ธนาคารกรุงไทย</option>
+                                    <option value="ธนาคารทหารไทย">ธนาคารทหารไทย</option>
+                                    <option value="ธนาคารไทยพาณิชย์">ธนาคารไทยพาณิชย์</option>
+                                    <option value="ธนาคารกรุงศรีอยุธยา">ธนาคารกรุงศรีอยุธยา</option>
+                                    <option value="ธนาคารเกียรตินาคิน">ธนาคารเกียรตินาคิน</option>
+                                    <option value="ธนาคารซีไอเอ็มบีไทย">ธนาคารซีไอเอ็มบีไทย</option>
+                                    <option value="ธนาคารทิสโก้">ธนาคารทิสโก้</option>
+                                    <option value="ธนาคารธนชาต">ธนาคารธนชาต</option>
+                                    <option value="ธนาคารยูโอบี">ธนาคารยูโอบี</option>                                        
+                                    <option value="ธนาคารสแตนดาร์ดชาร์เตอร์ด (ไทย)">ธนาคารสแตนดาร์ดชาร์เตอร์ด (ไทย)</option>
+                                    <option value="ธนาคารไทยเครดิตเพื่อรายย่อย">ธนาคารไทยเครดิตเพื่อรายย่อย</option>
+                                    <option value="ธนาคารแลนด์ แอนด์ เฮาส์ ">ธนาคารแลนด์ แอนด์ เฮาส์ </option>
+                                    <option value="ธนาคารไอซีบีซี (ไทย)">ธนาคารไอซีบีซี (ไทย)</option>
+                                    <option value="ธนาคารพัฒนาวิสาหกิจขนาดกลางและขนาดย่อมแห่งประเทศไทย">ธนาคารพัฒนาวิสาหกิจขนาดกลางและขนาดย่อมแห่งประเทศไทย</option>
+                                    <option value="ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร">ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร</option>
+                                    <option value="ธนาคารเพื่อการส่งออกและนำเข้าแห่งประเทศไทย">ธนาคารเพื่อการส่งออกและนำเข้าแห่งประเทศไทย</option>
+                                    <option value="ธนาคารออมสิน">ธนาคารออมสิน</option>
+                                    <option value="ธนาคารอาคารสงเคราะห์">ธนาคารอาคารสงเคราะห์</option>
+                                    <option value="ธนาคารอิสลามแห่งประเทศไทย">ธนาคารอิสลามแห่งประเทศไทย</option>
+                                    <option value="ธนาคารแห่งประเทศจีน">ธนาคารแห่งประเทศจีน</option>
+                                    <option value="ธนาคารซูมิโตโม มิตซุย ทรัสต์ (ไทย)">ธนาคารซูมิโตโม มิตซุย ทรัสต์ (ไทย)</option>
+                                    <option value="ธนาคารฮ่องกงและเซี้ยงไฮ้แบงกิ้งคอร์ปอเรชั่น จำกัด">ธนาคารฮ่องกงและเซี้ยงไฮ้แบงกิ้งคอร์ปอเรชั่น จำกัด</option>
+                                </select>
                             </div>
                             <div class="col-span-12 sm:col-span-6">
                                 <label for="modal-form-4" class="form-label">เลขบัญชีธนาคาร</label>
-                                <input id="modal-form-4" name="bank_No" type="text" class="form-control" placeholder="เลขบัญชีธนาคาร" value="{{old('bank_No')}}">
+                                <input class="form-control" type="text" id="bank_No" name="bank_No" placeholder="เลขบัญชีธนาคาร" value="">
                             </div>
-                            {{-- เข้ากะ --}}
-                            
-                            <div class="intro-y col-span-12 sm:col-span-6">
+                        </div>
+                        <h2 class="modal-body intro-y text-lg font-medium mt-10 text-center">ข้อมูลการทำงาน</h2>
+                        <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
+                            <div class="intro-y col-span-12 sm:col-span-12">
                                 <label for="modal-form-4" class="form-label">ช่วงเวลากะ</label>
-                                <select class="tom-select w-full" type="text" id="Period" name="Period" onchange="selectitem()">
-                                    <option>เลือกช่วงเวลากะ</option>
+                                <select class="tom-select w-full" type="text" id="Period" name="Period" onchange="selectitem()" value="">
+                                    <option selected disabled>เลือกช่วงเวลากะ</option>
                                     @php 
-                                    $Period = DB::table('tb_period')->get();
-                                        if($Period)
-                                        {
-                                            foreach($Period as $data)
-                                        {
-                                        @endphp
-                                            <option value="{{$data->id}}">เข้า {{$data->entertime}} ออก {{$data->leavetime}} </option>
-                                        @php
+                                        $Period = DB::table('tb_period')->get();
+                                            if($Period)
+                                            {
+                                                foreach($Period as $data_Period1)
+                                            {
+                                            @endphp
+                                                <option value="{{$data_Period1->id}}">เข้า {{$data_Period1->entertime}} ออก {{$data_Period1->leavetime}} </option>
+                                            @php
+                                            }
                                         }
-                                    }
-                                    @endphp
-                                </select>
-                                {{-- <label for="update-profile-form-9" class="form-label">เวลาเข้ากะ</label>
-                                <input class="form-control" id="entertime" type="time" name="entertime" placeholder="เวลาเข้ากะ" value=""> --}}
-                            </div>
-                            <div class="intro-y col-span-12 sm:col-span-6">
-                                <label for="update-profile-form-9" class="form-label">เวลาออกกะ</label>
-                                <input class="form-control" id="leavetime" type="time" name="leavetime" placeholder="เวลาออกกะ" value="">
-                            </div>
-                            {{-- <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">เวลาเข้ากะ</label>
-                                <select class="tom-select w-full" type="text" id="Detail_refer" name="Detail_refer" onchange="selectitem()">
-                                    <option>เลือกเวลาเข้ากะ</option>
-                                    <option>A1 08.00 - 17.00</option>
-                                    <option>A2 13.00 - 21.00</option>
-                                    <option>A1 18.00 - 03.00</option>
-                                </select>
-                            </div> --}}
-                            
-                            
-                            
-                            <div class="intro-y col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">เวลากะที่ทำจริง</label>
-                                <select class="tom-select w-full" type="text" id="Period" name="Period" onchange="selectitem()">
-                                    <option>เลือกช่วงเวลากะ</option>
-                                    @php 
-                                    $Period = DB::table('tb_period')->get();
-                                        if($Period)
-                                        {
-                                            foreach($Period as $data)
-                                        {
-                                        @endphp
-                                            <option value="{{$data->id}}">เข้า {{$data->entertime}} ออก {{$data->leavetime}} </option>
-                                        @php
-                                        }
-                                    }
                                     @endphp
                                 </select>
                             </div>
-                            {{-- <div class="intro-y col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">เวลากะที่ทำจริง</label>
-                                <label for="update-profile-form-9" class="form-label">เวลาเข้ากะ</label>
-                                <input class="form-control" id="entertime" type="time" name="entertime" placeholder="เวลาเข้ากะ" value="">
+                            <div class="intro-y col-span-12 sm:col-span-6">
+                                <label for="update-profile-form-9" class="form-label">เวลาเข้ากะจริง</label>
+                                <input class="form-control" type="time" id="enter_real" name="enter_real" placeholder="เวลาเข้ากะจริง" value="">
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-6">
-                                <label for="update-profile-form-9" class="form-label">เวลาออกกะ</label>
-                                <input class="form-control" id="leavetime" type="time" name="leavetime" placeholder="เวลาออกกะ" value="">
-                            </div> --}}
-
-                            {{-- <div class="mb-3">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <div class="col-span-12 sm:col-span-6">
-                                            <label for="modal-form-4" class="form-label">เวลาเข้ากะ</label>
-                                            <select class="tom-select w-full" type="text" id="Detail_refer" name="Detail_refer" onchange="selectitem()">
-                                                <option>เลือกเวลาเข้ากะ</option>
-                                                <option>A1 08.00 - 17.00</option>
-                                                <option>A2 13.00 - 21.00</option>
-                                                <option>A1 18.00 - 03.00</option>
-                                            </select>
-                                        </div>
-                                    </li>
-                                </ul>
+                                <label for="update-profile-form-9" class="form-label">เวลาออกกะจริง</label>
+                                <input class="form-control" type="time" id="leave_real" name="leave_real" placeholder="เวลาออกกะจริง" value="">
                             </div>
-                            <br>
-                            <div id="form-container-Refer"></div>
-                            <div
-                                <button id="add-form-refer-btn" type="button" class="btn btn-dark shadow-md ml-2" >+</button>
-                            </div> --}}
-
-                        {{-- <div class="mb-3">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-                                        <select class="tom-select w-full" type="text" id="" name="Refer_name[]" onchange="selectitem()">
-                                            <option>เลือกเวลาเข้ากะ</option>
-                                            <option>A1 08.00 - 17.00</option>
-                                            <option>A2 13.00 - 21.00</option>
-                                            <option>A1 18.00 - 03.00</option>
-                                        </select>
-                                        <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                                            <div id="form-container-Refer">
-                                                <button type="button" class="btn btn-danger shadow-md ml-2" onclick="del_Refer(${formCountRefer})">-</button>
-                                            </div>
-                                        </div>
+                            <div class="col-span-12">
+                                <label class="form-label"></label>
+                                <div class="grid grid-cols-11 gap-3">
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">O.T</label>
+                                        <input class="form-control" type="text" id="modal-form-4" name="ot" placeholder="O.T" value="" required>
                                     </div>
-                                </li>
-                            </ul>
-                        </div> --}}
-                            {{-- เข้ากะ --}}
-
-                        <!-- จบส่วนท้ายบทความ -->
-                                {{-- <div class="mb-3">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            <div class="col-span-12 sm:col-span-6">
-                                                <label for="modal-form-4" class="form-label">เวลาเข้ากะ</label>
-                                                <select class="tom-select w-full" type="text" id="Detail_refer" name="Detail_refer" onchange="selectitem()">
-                                                    <option>เลือกเวลาเข้ากะ</option>
-                                                    <option>A1 08.00 - 17.00</option>
-                                                    <option>A2 13.00 - 21.00</option>
-                                                    <option>A1 18.00 - 03.00</option>
-                                                </select>
-                                                <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                                                    <!-- <button id="add-form-refer-btn" class="btn btn-dark shadow-md ml-2">Print</button> -->
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">ผ่าเที่ยง</label>
+                                        <input class="form-control" type="number" min="0" id="Midday_break" name="Midday_break" placeholder="ผ่าเที่ยง" value="">
+                                    </div>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">ที่อับอากาศ</label>
+                                        <input class="form-control" type="number" min="0" id="confined_space" name="confined_space" placeholder="ที่อับอากาศ" value="">
+                                    </div>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">เข้ากะ</label>
+                                        <input class="form-control" type="number" min="0" id="On_shift" name="On_shift" placeholder="เข้ากะ" value="">
+                                    </div>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">พิเศษ</label>
+                                        <input class="form-control" type="number" min="0" id="special" name="special" placeholder="พิเศษ" value="">
+                                    </div>
+                                    <h2 class="text-lg font-medium mt-10">ชั่วโมง</h2>
                                 </div>
-                            </div>
-                                <div id="form-container-Refer"></div>
-                                <div
-                                    <button id="add-form-refer-btn" type="button" class="btn btn-dark shadow-md ml-2" >+</button>
-                                </div>
-                            <br> --}}
-
-
-                            {{-- <div class="mb-3">
-                                <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <div class="intro-y flex flex-col sm:flex-row items-center mt-8">
-                                    <select class="tom-select w-full" type="text" id="" name="Refer_name[]" onchange="selectitem()">
-                                                        <option>เลือกเวลาเข้ากะ</option>
-                                                        <option>A1 08.00 - 17.00</option>
-                                                        <option>A2 13.00 - 21.00</option>
-                                                        <option>A1 18.00 - 03.00</option>
-                                                    </select>
-                                    <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                                        <div id="form-container-Refer">
-                                        <button type="button" class="btn btn-danger shadow-md ml-2" onclick="del_Refer(${formCountRefer})">-</button>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </li>
-                                </ul>
-                            </div> --}}
-                        <!-- จบส่วนท้ายบทความ -->
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">ค่าแรงต่อชั่วโมง</label>
-                                <input id="modal-form-4" name="rate" type="text" class="form-control" placeholder="ค่าแรงต่อชั่วโมง" value="{{old('rate')}}">
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">O.T</label>
-                                <input id="modal-form-4" name="ot" type="text" class="form-control" placeholder="O.T" value="{{old('ot')}}" required>
                             </div>
                             <div class="col-span-12">
                                 <label class="form-label"></label>
                                 <div class="grid grid-cols-12 gap-3">
-                                    <select class="form-select sm:mr-2 col-span-3" name="Midday_break" id="Midday_break" value="" data-placeholder="ผ่าเที่ยง" aria-label="Default select example" fdprocessedid="2wyzvl">
-                                        <option selected="" disabled="">ผ่าเที่ยง</option>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                    </select>
-                                    <select class="form-select sm:mr-2 col-span-3" name="confined_space" id="confined_space" value="" data-placeholder="ที่อับอากาศ" aria-label="Default select example" fdprocessedid="2wyzvl">
-                                        <option selected="" disabled="">ที่อับอากาศ</option>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                    </select>
-                                    <select class="form-select sm:mr-2 col-span-3" name="On_shift" id="On_shift" value="" data-placeholder="เข้ากะ" aria-label="Default select example" fdprocessedid="2wyzvl">
-                                        <option selected="" disabled="">เข้ากะ</option>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                    </select>
-                                    <select class="form-select sm:mr-2 col-span-3" name="special" id="special" value="" data-placeholder="พิเศษ" aria-label="Default select example" fdprocessedid="2wyzvl">
-                                        <option selected="" disabled="">พิเศษ</option>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                    </select>
+                                    <div class="col-span-12 col-span-3">
+                                        <label for="modal-form-4" class="form-label">เบี้ยเลี้ยง</label>
+                                        <input class="form-control" type="text" id="allowance" name="allowance" placeholder="เบี้ยเลี้ยง" value="">
+                                    </div>
+                                    <div class="col-span-12 col-span-3">
+                                        <label for="modal-form-4" class="form-label">เบี้ยเลี้ยงพิเศษ ต่างจังหวัด</label>
+                                        <input class="form-control" type="text" id="allowance_special" name="allowance_special" placeholder="เบี้ยเลี้ยงพิเศษ ต่างจังหวัด" value="">
+                                    </div>
+                                    <div class="col-span-12 col-span-5">
+                                        <label for="modal-form-4" class="form-label">ค่ารถ</label>
+                                        <input class="form-control" type="text" id="car_fare" name="car_fare" placeholder="ค่ารถ" value="">
+                                    </div>
+                                    <h2 class="text-lg font-medium mt-10">บาท</h2>
                                 </div>
                             </div>
-                            
-                            {{-- <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">ผ่าเที่ยง</label>
-                                <select class="tom-select w-full" type="text" id="Detail_refer" name="Detail_refer" onchange="selectitem()">
-                                    <option>เลือกจำนวนชั่วโมง</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                </select>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">ที่อับอากาศ</label>
-                                <select class="tom-select w-full" type="text" id="Detail_refer" name="Detail_refer" onchange="selectitem()">
-                                    <option>เลือกจำนวนชั่วโมง</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                </select>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">เข้ากะ</label>
-                                <select class="tom-select w-full" type="text" id="Detail_refer" name="Detail_refer" onchange="selectitem()">
-                                    <option>เลือกจำนวนชั่วโมง</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                </select>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">พิเศษ</label>
-                                <select class="tom-select w-full" type="text" id="Detail_refer" name="Detail_refer" onchange="selectitem()">
-                                    <option>เลือกจำนวนชั่วโมง</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                </select>
-                            </div> --}}
-                            
-                            <div class="col-span-12">
-                                <label class="form-label"></label>
-                                <div class="grid grid-cols-12 gap-3">
-                                    <input class="form-control col-span-4" type="text" id="allowance" name="allowance" placeholder="เบี้ยเลี้ยง" aria-label="default input inline 2" value="{{old('allowance')}}">
-                                    <input class="form-control col-span-4" type="text" id="allowance_special" name="allowance_special" placeholder="เบี้ยเลี้ยงพิเศษ ต่างจังหวัด" aria-label="default input inline 3" value="{{old('allowance_special')}}">
-                                    <input class="form-control col-span-4" type="text" id="car_fare" name="car_fare" placeholder="ค่ารถ" aria-label="default input inline 2" value="{{old('car_fare')}}">
-                                </div>
-                            </div>
-                            {{-- <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-3" class="form-label">เบี้ยเลี้ยง</label>
-                                <input id="modal-form-3" name="firstname" type="text" class="form-control" placeholder="เบี้ยเลี้ยง" value="{{old('firstname')}}" required>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">เบี้ยเลี้ยงพิเศษ ต่างจังหวัด</label>
-                                <input id="modal-form-4" name="lastname" type="text" class="form-control" placeholder="เบี้ยเลี้ยงพิเศษ" value="{{old('lastname')}}" required>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">ค่ารถ</label>
-                                <select class="tom-select w-full" type="text" id="Detail_refer" name="Detail_refer" onchange="selectitem()">
-                                    <option>เลือกค่ารถ</option>
-                                    <option>A1 08.00 - 17.00</option>
-                                    <option>A2 13.00 - 21.00</option>
-                                    <option>A1 18.00 - 03.00</option>
-                                </select>
-                            </div> --}}
-                            <div class="col-span-12 sm:col-span-6">
+                            <div class="col-span-12 sm:col-span-12">
                                 <label for="modal-form-4" class="form-label">หักภาษี ณ.ที่จ่าย</label>
-                                {{-- <div class="text-danger mt-2">กรุณาเลือกเวลาเข้ากะ</div> --}}
                                 <select class="tom-select w-full" type="text" id="tax" name="tax" onchange="selectitem()">
                                     <option>เลือกการหักภาษี</option>
                                     <option>หัก 3%</option>
@@ -557,50 +373,37 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                             <div class="col-span-12">
                                 <label class="form-label"></label>
-                                <div class="grid grid-cols-12 gap-3">
-                                    <input class="form-control col-span-2" type="text" id="Residual_wages" name="Residual_wages" placeholder="ค่าแรงตกค้าง" aria-label="default input inline 2" value="{{old('Residual_wages')}}">
-                                    <input class="form-control col-span-2" type="text" id="social_security" name="social_security" placeholder="ประกันสังคม" aria-label="default input inline 3" value="{{old('social_security')}}">
-                                    <input class="form-control col-span-2" type="text" id="advance_payment" name="advance_payment" placeholder="เบิกล่วงหน้า" aria-label="default input inline 2" value="{{old('advance_payment')}}">
-                                    <input class="form-control col-span-2" type="text" id="deduction_advance_payment" name="deduction_advance_payment" placeholder="หักเบิกล่วงหน้า" aria-label="default input inline 2" value="{{old('deduction_advance_payment')}}">
-                                    <input class="form-control col-span-2" type="text" id="extra_wages" name="extra_wages" placeholder="ค่าจ้างพิเศษ" aria-label="default input inline 3" value="{{old('extra_wages')}}">
+                                <div class="grid grid-cols-11 gap-3">
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">ค่าแรงตกค้าง</label>
+                                        <input class="form-control" type="text" id="Residual_wages" name="Residual_wages" placeholder="ค่าแรงตกค้าง" value="">
+                                    </div>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">ประกันสังคม</label>
+                                        <input class="form-control" type="text" id="social_security" name="social_security" placeholder="ประกันสังคม" value="">
+                                    </div>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">เบิกล่วงหน้า</label>
+                                        <input class="form-control" type="text" id="advance_payment" name="advance_payment" placeholder="เบิกล่วงหน้า" value="">
+                                    </div>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">หักเบิกล่วงหน้า</label>
+                                        <input class="form-control" type="text" id="deduction_advance_payment" name="deduction_advance_payment" placeholder="หักเบิกล่วงหน้า" value="">
+                                    </div>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">ค่าจ้างพิเศษ</label>
+                                        <input class="form-control" type="text" id="extra_wages" name="extra_wages" placeholder="ค่าจ้างพิเศษ" value="">
+                                    </div>
+                                    <h2 class="text-lg font-medium mt-10">บาท</h2>
                                 </div>
                             </div>
-                            {{-- <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-3" class="form-label">ค่าแรงตกค้าง</label>
-                                <input id="modal-form-3" name="firstname" type="text" class="form-control" placeholder="ค่าแรงตกค้าง" value="{{old('firstname')}}" required>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">ประกันสังคม</label>
-                                <input id="modal-form-4" name="lastname" type="text" class="form-control" placeholder="ประกันสังคม" value="{{old('lastname')}}" required>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">เบิกล่วงหน้า</label>
-                                <input id="modal-form-4" name="lastname" type="text" class="form-control" placeholder="เบิกล่วงหน้า" value="{{old('lastname')}}" required>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-3" class="form-label">หักเบิกล่วงหน้า</label>
-                                <input id="modal-form-3" name="firstname" type="text" class="form-control" placeholder="หักเบิกล่วงหน้า" value="{{old('firstname')}}" required>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">ค่าจ้างพิเศษ</label>
-                                <input id="modal-form-4" name="lastname" type="text" class="form-control" placeholder="ค่าจ้างพิเศษ" value="{{old('lastname')}}" required>
-                            </div> --}}
-
-                            {{-- <div class="col-span-12 sm:col-span-6">
-                                <label class="form-label">Role</label>
-                                <select data-placeholder="Select your favorite actors" name="role" class="tom-select w-full" id="crud-form-2" >
-                                    <option value="admin" selected>admin</option>
-                                    <option value="viewer">viewer</option>
-
-                                </select>
-                            </div> --}}
                         </div>
                         <div class="modal-footer">
                             <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1">Cancel</button>
                             <button type="submit" class="btn btn-primary w-20">Save</button>
                         </div>
-                        </form>
-                    </div>
+                    </form>
+                </div>
             </div>
         </div>
         <!-- END: Create Admin Modal -->
@@ -613,36 +416,51 @@ License: You must have a valid license purchased only from themeforest(the above
                         <h2 class="font-medium text-base mr-auto">Edit admin <b>{{$data->username}}</b></h2>
                     </div>
                     <form action="{{url('/Data/update')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <input type="hidden" name="id" value="{{$data->id}}">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$data->id}}">
                         <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
-
                             <div class="intro-y col-span-12 sm:col-span-4">
                                 <label for="update-profile-form-9" class="form-label">วันที่</label>
-                                <input class="form-control" id="date" type="date" name="date" placeholder="วันที่" value="{{$data->date}}" required>
+                                <input class="form-control" type="date" id="date" name="date" placeholder="วันที่" value="{{$data->date}}" required>
                             </div>
                             <div class="col-span-12 sm:col-span-4">
                                 <label for="modal-form-3" class="form-label">JOB NO.</label>
-                                <input id="job_No" name="job_No" type="text" class="form-control" placeholder="JOB NO." value="{{$data->job_No}}" required>
+                                <input class="form-control" type="text" id="job_No" name="job_No" placeholder="JOB NO." value="{{$data->job_No}}" required>
                             </div>
                             <div class="col-span-12 sm:col-span-4">
                                 <label for="modal-form-4" class="form-label">WO NO.</label>
-                                <input id="WO_No" name="WO_No" type="text" class="form-control" placeholder="WO NO." value="{{$data->WO_No}}" required>
+                                <input class="form-control" type="text" id="WO_No" name="WO_No" placeholder="WO NO." value="{{$data->WO_No}}" required>
                             </div>
+                        </div>                            
+                        <h2 class="modal-body intro-y text-lg font-medium mt-10 text-center">ข้อมูลพนักงาน</h2>
+                        <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
                             <div class="col-span-12">
                                 <label class="form-label">ชื่อ-นามสกุล</label>
                                 <div class="grid grid-cols-12 gap-2">
-                                    <select class="tom-select sm:mr-2 col-span-4" name="first_name" id="first_name" value="{{$data->first_name}}" data-placeholder="ชื่อพนักงาน" aria-label="Default select example" required>
-                                        <option selected disabled>ชื่อพนักงาน</option>
-                                        <option value="ชื่อพนักงาน1">ชื่อพนักงาน1</option>
-                                        <option value="ชื่อพนักงาน2">ชื่อพนักงาน2</option>
-                                        <option value="ชื่อพนักงาน3">ชื่อพนักงาน3</option>
-                                    </select>
-                                    <input class="form-control col-span-4" type="text" id="last_name" name="last_name" value="{{$data->last_name}}" placeholder="นามสกุลพนักงาน" aria-label="default input inline 3">
-                                    <div class="intro-y col-span-12 sm:col-span-4">
-                                        <input  class="form-control" id="image" name="image"
-                                        type="file" data-default-file="" accept="image/*" />
-                                    </div>
+                                <select class="tom-select sm:mr-2 xl:col-span-9" name="first_name" id="first_name" value="{{$data->first_name}}" data-placeholder="ชื่อพนักงาน" aria-label="Default select example" required>
+                                    <option selected disabled>ชื่อพนักงาน</option>
+                                        @php 
+                                        $Employee = DB::table('tb_employee')->get();
+                                            if($Employee)
+                                            {
+                                                foreach($Employee as $data_Employee1)
+                                            {
+                                            @endphp
+                                                <option value="{{$data_Employee1->id}}"> {{$data_Employee1->prefix_name}}{{$data_Employee1->first_name}}  {{$data_Employee1->last_name}} </option>
+                                            @php
+                                            }
+                                        }
+                                        @endphp
+                                </select>
+                                <div class="intro-y col-span-12 sm:col-span-3">
+                                    <input  class="form-control" type="file" id="image" name="image" data-default-file="" accept="image/*"/>
+                                    <center>@if($data->image == '')
+                                        <span class="hidden"></span>
+                                            @else
+                                                <img src="{{asset('public/upload/img/')}}/{{$data->image}}" width="500px" class="img-thumbnail">
+                                            @endif
+                                    </center>
+                                </div>
                                 </div>
                             </div>
                             <div class="col-span-12">
@@ -651,34 +469,73 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <textarea class="form-control" type="text" id="address" name="address" placeholder="ที่อยู่พนักงาน" value="{{$data->address}}"></textarea>
                                 </div>
                             </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-1" class="form-label">รหัสพนักงาน</label>
-                                <input id="employee_ID" name="employee_ID" type="text" class="form-control" placeholder="รหัสพนักงาน" value="{{$data->employee_ID}}">
+                            <div class="col-span-12">
+                                <label class="form-label"></label>
+                                <div class="grid grid-cols-12 gap-3">
+                                    <div class="col-span-12 col-span-3">
+                                        <label for="modal-form-4" class="form-label">รหัสพนักงาน</label>
+                                        <input class="form-control" type="text" id="employee_ID" name="employee_ID" placeholder="รหัสพนักงาน" value="{{$data->employee_ID}}">
+                                    </div>
+                                    <div class="col-span-12 col-span-3">
+                                        <label for="modal-form-4" class="form-label">รหัสสแกน</label>
+                                        <input class="form-control" type="text" id="scan_code" name="scan_code" placeholder="รหัสสแกน" value="{{$data->scan_code}}">
+                                    </div>
+                                    <div class="col-span-12 col-span-5">
+                                        <label for="modal-form-4" class="form-label">ค่าแรงต่อชั่วโมง</label>
+                                        <input class="form-control" type="text" id="rate" name="rate" placeholder="ค่าแรงต่อชั่วโมง" value="{{$data->rate}}">
+                                    </div>
+                                    <h2 class="text-lg font-medium mt-10 pl-6">บาท</h2>
+                                </div>
                             </div>
                             <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-2" class="form-label">รหัสสแกน</label>
-                                <input id="scan_code" name="scan_code" type="text" class="form-control" placeholder="รหัสสแกน" value="{{$data->scan_code}}">
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-3" class="form-label">ธนาคาร</label>
-                                <input id="bank" name="bank" type="text" class="form-control" placeholder="ธนาคาร" value="{{$data->bank}}">
+                                <label for="modal-form-4" class="form-label">ธนาคาร</label>
+                                <select class="tom-select w-full" type="text" id="bank" name="bank" onchange="selectitem()" value="{{$data->bank}}">
+                                    <option selected disabled>เลือกธนาคาร</option>
+                                    <option value="ธนาคารกรุงเทพ">ธนาคารกรุงเทพ</option>
+                                    <option value="ธนาคารกสิกรไทย">ธนาคารกสิกรไทย</option>
+                                    <option value="ธนาคารกรุงไทย">ธนาคารกรุงไทย</option>
+                                    <option value="ธนาคารทหารไทย">ธนาคารทหารไทย</option>
+                                    <option value="ธนาคารไทยพาณิชย์">ธนาคารไทยพาณิชย์</option>
+                                    <option value="ธนาคารกรุงศรีอยุธยา">ธนาคารกรุงศรีอยุธยา</option>
+                                    <option value="ธนาคารเกียรตินาคิน">ธนาคารเกียรตินาคิน</option>
+                                    <option value="ธนาคารซีไอเอ็มบีไทย">ธนาคารซีไอเอ็มบีไทย</option>
+                                    <option value="ธนาคารทิสโก้">ธนาคารทิสโก้</option>
+                                    <option value="ธนาคารธนชาต">ธนาคารธนชาต</option>
+                                    <option value="ธนาคารยูโอบี">ธนาคารยูโอบี</option>                                        
+                                    <option value="ธนาคารสแตนดาร์ดชาร์เตอร์ด (ไทย)">ธนาคารสแตนดาร์ดชาร์เตอร์ด (ไทย)</option>
+                                    <option value="ธนาคารไทยเครดิตเพื่อรายย่อย">ธนาคารไทยเครดิตเพื่อรายย่อย</option>
+                                    <option value="ธนาคารแลนด์ แอนด์ เฮาส์ ">ธนาคารแลนด์ แอนด์ เฮาส์ </option>
+                                    <option value="ธนาคารไอซีบีซี (ไทย)">ธนาคารไอซีบีซี (ไทย)</option>
+                                    <option value="ธนาคารพัฒนาวิสาหกิจขนาดกลางและขนาดย่อมแห่งประเทศไทย">ธนาคารพัฒนาวิสาหกิจขนาดกลางและขนาดย่อมแห่งประเทศไทย</option>
+                                    <option value="ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร">ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร</option>
+                                    <option value="ธนาคารเพื่อการส่งออกและนำเข้าแห่งประเทศไทย">ธนาคารเพื่อการส่งออกและนำเข้าแห่งประเทศไทย</option>
+                                    <option value="ธนาคารออมสิน">ธนาคารออมสิน</option>
+                                    <option value="ธนาคารอาคารสงเคราะห์">ธนาคารอาคารสงเคราะห์</option>
+                                    <option value="ธนาคารอิสลามแห่งประเทศไทย">ธนาคารอิสลามแห่งประเทศไทย</option>
+                                    <option value="ธนาคารแห่งประเทศจีน">ธนาคารแห่งประเทศจีน</option>
+                                    <option value="ธนาคารซูมิโตโม มิตซุย ทรัสต์ (ไทย)">ธนาคารซูมิโตโม มิตซุย ทรัสต์ (ไทย)</option>
+                                    <option value="ธนาคารฮ่องกงและเซี้ยงไฮ้แบงกิ้งคอร์ปอเรชั่น จำกัด">ธนาคารฮ่องกงและเซี้ยงไฮ้แบงกิ้งคอร์ปอเรชั่น จำกัด</option>
+                                </select>
                             </div>
                             <div class="col-span-12 sm:col-span-6">
                                 <label for="modal-form-4" class="form-label">เลขบัญชีธนาคาร</label>
-                                <input id="bank_No" name="bank_No" type="text" class="form-control" placeholder="เลขบัญชีธนาคาร" value="{{$data->bank_No}}">
+                                <input class="form-control" type="text" id="bank_No" name="bank_No" placeholder="เลขบัญชีธนาคาร" value="{{$data->bank_No}}">
                             </div>
-                            <div class="intro-y col-span-12 sm:col-span-6">
+                        </div>
+                        <h2 class="modal-body intro-y text-lg font-medium mt-10 text-center">ข้อมูลการทำงาน</h2>
+                        <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
+                            <div class="intro-y col-span-12 sm:col-span-12">
                                 <label for="modal-form-4" class="form-label">ช่วงเวลากะ</label>
-                                <select class="tom-select w-full" type="text" id="Period" name="Period" onchange="selectitem()">
-                                    <option>เลือกช่วงเวลากะ</option>
+                                <select class="tom-select w-full" type="text" id="Period" name="Period" onchange="selectitem()" value="{{$data->Period}}">
+                                    <option selected disabled>เลือกช่วงเวลากะ</option>
                                     @php 
                                     $Period = DB::table('tb_period')->get();
                                         if($Period)
                                         {
-                                            foreach($Period as $data)
+                                            foreach($Period as $data_Period1)
                                         {
                                         @endphp
-                                            <option value="{{$data->id}}">เข้า {{$data->entertime}} ออก {{$data->leavetime}} </option>
+                                            <option value="{{$data_Period1->id}}">เข้า {{$data_Period1->entertime}} ออก {{$data_Period1->leavetime}} </option>
                                         @php
                                         }
                                     }
@@ -686,101 +543,58 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </select>
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-6">
-                                <label for="update-profile-form-9" class="form-label">เวลาออกกะ</label>
-                                <input class="form-control" id="leavetime" type="time" name="leavetime" placeholder="เวลาออกกะ" value="{{$data->leavetime}}">
+                                <label for="update-profile-form-9" class="form-label">เวลาเข้ากะจริง</label>
+                                <input class="form-control" type="time" id="enter_real" name="enter_real" placeholder="เวลาเข้ากะจริง" value="{{$data->enter_real}}">
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">เวลากะที่ทำจริง</label>
-                                <select class="tom-select w-full" type="text" id="Period" name="Period" onchange="selectitem()">
-                                    <option>เลือกช่วงเวลากะ</option>
-                                    @php 
-                                    $Period = DB::table('tb_period')->get();
-                                        if($Period)
-                                        {
-                                            foreach($Period as $data)
-                                        {
-                                        @endphp
-                                            <option value="{{$data->id}}">เข้า {{$data->entertime}} ออก {{$data->leavetime}} </option>
-                                        @php
-                                        }
-                                    }
-                                    @endphp
-                                </select>
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">ค่าแรงต่อชั่วโมง</label>
-                                <input id="modal-form-4" name="rate" type="text" class="form-control" placeholder="ค่าแรงต่อชั่วโมง" value="{{$data->rate}}">
-                            </div>
-                            <div class="col-span-12 sm:col-span-6">
-                                <label for="modal-form-4" class="form-label">O.T</label>
-                                <input id="modal-form-4" name="ot" type="text" class="form-control" placeholder="O.T" value="{{$data->ot}}" required>
+                                <label for="update-profile-form-9" class="form-label">เวลาออกกะจริง</label>
+                                <input class="form-control" type="time" id="leave_real" name="leave_real" placeholder="เวลาออกกะจริง" value="{{$data->leave_real}}">
                             </div>
                             <div class="col-span-12">
                                 <label class="form-label"></label>
-                                <div class="grid grid-cols-12 gap-3">
-                                    <select class="form-select sm:mr-2 col-span-3" name="Midday_break" id="Midday_break" value="" data-placeholder="ผ่าเที่ยง" aria-label="Default select example" fdprocessedid="2wyzvl">
-                                        <option selected="" disabled="">ผ่าเที่ยง</option>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                    </select>
-                                    <select class="form-select sm:mr-2 col-span-3" name="confined_space" id="confined_space" value="" data-placeholder="ที่อับอากาศ" aria-label="Default select example" fdprocessedid="2wyzvl">
-                                        <option selected="" disabled="">ที่อับอากาศ</option>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                    </select>
-                                    <select class="form-select sm:mr-2 col-span-3" name="On_shift" id="On_shift" value="" data-placeholder="เข้ากะ" aria-label="Default select example" fdprocessedid="2wyzvl">
-                                        <option selected="" disabled="">เข้ากะ</option>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                    </select>
-                                    <select class="form-select sm:mr-2 col-span-3" name="special" id="special" value="" data-placeholder="พิเศษ" aria-label="Default select example" fdprocessedid="2wyzvl">
-                                        <option selected="" disabled="">พิเศษ</option>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                    </select>
+                                <div class="grid grid-cols-11 gap-3">
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">O.T</label>
+                                        <input class="form-control" type="text" id="modal-form-4" name="ot" placeholder="O.T" value="{{$data->ot}}" required>
+                                    </div>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">ผ่าเที่ยง</label>
+                                        <input class="form-control" type="number" min="0" id="Midday_break" name="Midday_break" placeholder="ผ่าเที่ยง" value="{{$data->Midday_break}}">
+                                    </div>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">ที่อับอากาศ</label>
+                                        <input class="form-control" type="number" min="0" id="confined_space" name="confined_space" placeholder="ที่อับอากาศ" value="{{$data->confined_space}}">
+                                    </div>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">เข้ากะ</label>
+                                        <input class="form-control" type="number" min="0" id="On_shift" name="On_shift" placeholder="เข้ากะ" value="{{$data->On_shift}}">
+                                    </div>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">พิเศษ</label>
+                                        <input class="form-control" type="number" min="0" id="special" name="special" placeholder="พิเศษ" value="{{$data->special}}">
+                                    </div>
+                                    <h2 class="text-lg font-medium mt-10">ชั่วโมง</h2>
                                 </div>
                             </div>
                             <div class="col-span-12">
                                 <label class="form-label"></label>
                                 <div class="grid grid-cols-12 gap-3">
-                                    <input class="form-control col-span-4" type="text" id="allowance" name="allowance" placeholder="เบี้ยเลี้ยง" aria-label="default input inline 2" value="{{$data->allowance}}">
-                                    <input class="form-control col-span-4" type="text" id="allowance_special" name="allowance_special" placeholder="เบี้ยเลี้ยงพิเศษ ต่างจังหวัด" aria-label="default input inline 3" value="{{$data->allowance_special}}">
-                                    <input class="form-control col-span-4" type="text" id="car_fare" name="car_fare" placeholder="ค่ารถ" aria-label="default input inline 2" value="{{$data->car_fare}}">
+                                    <div class="col-span-12 col-span-3">
+                                        <label for="modal-form-4" class="form-label">เบี้ยเลี้ยง</label>
+                                        <input class="form-control" type="text" id="allowance" name="allowance" placeholder="เบี้ยเลี้ยง" value="{{$data->allowance}}">
+                                    </div>
+                                    <div class="col-span-12 col-span-3">
+                                        <label for="modal-form-4" class="form-label">เบี้ยเลี้ยงพิเศษ ต่างจังหวัด</label>
+                                        <input class="form-control" type="text" id="allowance_special" name="allowance_special" placeholder="เบี้ยเลี้ยงพิเศษ ต่างจังหวัด" value="{{$data->allowance_special}}">
+                                    </div>
+                                    <div class="col-span-12 col-span-5">
+                                        <label for="modal-form-4" class="form-label">ค่ารถ</label>
+                                        <input class="form-control" type="text" id="car_fare" name="car_fare" placeholder="ค่ารถ" value="{{$data->car_fare}}">
+                                    </div>
+                                    <h2 class="text-lg font-medium mt-10">บาท</h2>
                                 </div>
                             </div>
-                            <div class="col-span-12 sm:col-span-6">
+                            <div class="col-span-12 sm:col-span-12">
                                 <label for="modal-form-4" class="form-label">หักภาษี ณ.ที่จ่าย</label>
                                 <select class="tom-select w-full" type="text" id="tax" name="tax" onchange="selectitem()">
                                     <option>เลือกการหักภาษี</option>
@@ -790,15 +604,30 @@ License: You must have a valid license purchased only from themeforest(the above
                             </div>
                             <div class="col-span-12">
                                 <label class="form-label"></label>
-                                <div class="grid grid-cols-12 gap-3">
-                                    <input class="form-control col-span-2" type="text" id="Residual_wages" name="Residual_wages" placeholder="ค่าแรงตกค้าง" aria-label="default input inline 2" value="{{$data->Residual_wages}}">
-                                    <input class="form-control col-span-2" type="text" id="social_security" name="social_security" placeholder="ประกันสังคม" aria-label="default input inline 3" value="{{$data->social_security}}">
-                                    <input class="form-control col-span-2" type="text" id="advance_payment" name="advance_payment" placeholder="เบิกล่วงหน้า" aria-label="default input inline 2" value="{{$data->advance_payment}}">
-                                    <input class="form-control col-span-2" type="text" id="deduction_advance_payment" name="deduction_advance_payment" placeholder="หักเบิกล่วงหน้า" aria-label="default input inline 2" value="{{$data->deduction_advance_payment}}">
-                                    <input class="form-control col-span-2" type="text" id="extra_wages" name="extra_wages" placeholder="ค่าจ้างพิเศษ" aria-label="default input inline 3" value="{{$data->extra_wages}}">
+                                <div class="grid grid-cols-11 gap-3">
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">ค่าแรงตกค้าง</label>
+                                        <input class="form-control" type="text" id="Residual_wages" name="Residual_wages" placeholder="ค่าแรงตกค้าง" value="{{$data->Residual_wages}}">
+                                    </div>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">ประกันสังคม</label>
+                                        <input class="form-control" type="text" id="social_security" name="social_security" placeholder="ประกันสังคม" value="{{$data->social_security}}">
+                                    </div>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">เบิกล่วงหน้า</label>
+                                        <input class="form-control" type="text" id="advance_payment" name="advance_payment" placeholder="เบิกล่วงหน้า" value="{{$data->advance_payment}}">
+                                    </div>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">หักเบิกล่วงหน้า</label>
+                                        <input class="form-control" type="text" id="deduction_advance_payment" name="deduction_advance_payment" placeholder="หักเบิกล่วงหน้า" value="{{$data->deduction_advance_payment}}">
+                                    </div>
+                                    <div class="col-span-12 col-span-2">
+                                        <label for="modal-form-4" class="form-label">ค่าจ้างพิเศษ</label>
+                                        <input class="form-control" type="text" id="extra_wages" name="extra_wages" placeholder="ค่าจ้างพิเศษ" value="{{$data->extra_wages}}">
+                                    </div>
+                                    <h2 class="text-lg font-medium mt-10">บาท</h2>
                                 </div>
                             </div>
-                        </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1">Cancel</button>
@@ -818,7 +647,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <div class="modal-body p-0">
                         <div class="p-5 text-center"> <i data-lucide="x-circle" class="w-16 h-16 text-danger mx-auto mt-3"></i>
                             <div class="text-3xl mt-5">Are you sure?</div>
-                            <div class="text-slate-500 mt-2">Do you really want to delete {{$data->role}} {{$data->username}}? <br>This process cannot be undone.</div>
+                            <div class="text-slate-500 mt-2">Do you really want to delete {{$data->first_name}} {{$data->last_name}}? <br>This process cannot be undone.</div>
                         </div>
                         <div class="px-5 pb-8 text-center">
                             <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Cancel</button>

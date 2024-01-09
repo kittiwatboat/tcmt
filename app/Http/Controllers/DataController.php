@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Dataemployee\TB_Dataemployee;
+use DB;
 
 class DataController extends Controller
 {
