@@ -64,6 +64,9 @@ Route::get('/Setdata',[SetdataController::class,'index']);
 
 // Data page
 Route::get('/Data',[DataController::class,'index']);
+Route::post('/Data/create',[DataController::class,'create']);
+Route::post('/Data/update',[DataController::class,'update']);
+Route::get('/Data/delete/{id}',[DataController::class, 'delete']);
 
 //Payment
 Route::get('/Payment',[PaymentController::class,'index']);
