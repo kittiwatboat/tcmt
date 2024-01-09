@@ -244,12 +244,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <input id="modal-form-4" name="bank_No" type="text" class="form-control" placeholder="เลขบัญชีธนาคาร" value="{{old('bank_No')}}">
                             </div>
                             {{-- เข้ากะ --}}
-                            
+
                             <div class="intro-y col-span-12 sm:col-span-6">
                                 <label for="modal-form-4" class="form-label">ช่วงเวลากะ</label>
                                 <select class="tom-select w-full" type="text" id="Period" name="Period" onchange="selectitem()">
                                     <option>เลือกช่วงเวลากะ</option>
-                                    @php 
+                                    @php
                                     $Period = DB::table('tb_period')->get();
                                         if($Period)
                                         {
@@ -278,14 +278,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <option>A1 18.00 - 03.00</option>
                                 </select>
                             </div> --}}
-                            
-                            
-                            
+
+
+
                             <div class="intro-y col-span-12 sm:col-span-6">
                                 <label for="modal-form-4" class="form-label">เวลากะที่ทำจริง</label>
                                 <select class="tom-select w-full" type="text" id="Period" name="Period" onchange="selectitem()">
                                     <option>เลือกช่วงเวลากะ</option>
-                                    @php 
+                                    @php
                                     $Period = DB::table('tb_period')->get();
                                         if($Period)
                                         {
@@ -463,7 +463,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </select>
                                 </div>
                             </div>
-                            
+
                             {{-- <div class="col-span-12 sm:col-span-6">
                                 <label for="modal-form-4" class="form-label">ผ่าเที่ยง</label>
                                 <select class="tom-select w-full" type="text" id="Detail_refer" name="Detail_refer" onchange="selectitem()">
@@ -520,7 +520,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <option>8</option>
                                 </select>
                             </div> --}}
-                            
+
                             <div class="col-span-12">
                                 <label class="form-label"></label>
                                 <div class="grid grid-cols-12 gap-3">
@@ -671,14 +671,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <label for="modal-form-4" class="form-label">ช่วงเวลากะ</label>
                                 <select class="tom-select w-full" type="text" id="Period" name="Period" onchange="selectitem()">
                                     <option>เลือกช่วงเวลากะ</option>
-                                    @php 
+                                    @php
                                     $Period = DB::table('tb_period')->get();
                                         if($Period)
                                         {
-                                            foreach($Period as $data)
+                                            foreach($Period as $data_Period1)
                                         {
                                         @endphp
-                                            <option value="{{$data->id}}">เข้า {{$data->entertime}} ออก {{$data->leavetime}} </option>
+                                            <option value="{{$data_Period1->id}}">เข้า {{$data_Period1->entertime}} ออก {{$data_Period1->leavetime}} </option>
                                         @php
                                         }
                                     }
@@ -693,14 +693,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <label for="modal-form-4" class="form-label">เวลากะที่ทำจริง</label>
                                 <select class="tom-select w-full" type="text" id="Period" name="Period" onchange="selectitem()">
                                     <option>เลือกช่วงเวลากะ</option>
-                                    @php 
+                                    @php
                                     $Period = DB::table('tb_period')->get();
                                         if($Period)
                                         {
-                                            foreach($Period as $data)
+                                            foreach($Period as $data_Period2)
                                         {
                                         @endphp
-                                            <option value="{{$data->id}}">เข้า {{$data->entertime}} ออก {{$data->leavetime}} </option>
+                                            <option value="{{$data_Period2->id}}">เข้า {{$data_Period2->entertime}} ออก {{$data_Period2->leavetime}} </option>
                                         @php
                                         }
                                     }
