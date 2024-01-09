@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Dataemployee\TB_Dataemployee;
+// use App\Models\TB_Dataemployee as ModelsTB_Dataemployee;
+use DB;
 class SalaryController extends Controller
 {
     public function cal_salary(Request $request){
@@ -26,6 +28,23 @@ class SalaryController extends Controller
         'ot 2='.$salary_ot2,
         'ot all='.$salary_ot
         );
+    }
+    public function salary(){
+        $employee_id = 'test001';
+        $data_salary = DB::table('tb_dataemployee')->where('employee_ID', $employee_id)->get();
+        // dd($data_salary);
+        $salary_normal_values = []; // Create an array to store salary_normal values
+
+        foreach ($data_salary as $ds) {
+            $salary_normal = $ds->On_shift * $ds->rate;
+            $salary_normal_values[] = $salary_normal; // Store the value in the array
+            // dd('a=',$salary_normal); // Display the value inside the loop
+        }
+
+        $total_salary = array_sum($salary_normal_values);
+        dd($total_salary);
+
+
     }
     public function time_check(){
         $time1=["60554 2023-12-20 07:00:34","60554 2023-12-20 20:10:34","60555 2023-12-20 07:55:10","60555 2023-12-20 17:00:34"];

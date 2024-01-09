@@ -179,16 +179,16 @@ License: You must have a valid license purchased only from themeforest(the above
                         <form action="{{url('/admin/create_user')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                         <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
-                            
+
                             <div class="intro-y col-span-12 sm:col-span-6">
                                 <label for="update-profile-form-9" class="form-label">วันที่</label>
                                 <input class="form-control" id="date" type="date" name="date" placeholder="วันที่" value="{{old('date')}}" >
                             </div>
-                            <div class="grid grid-cols-7 gap-y-5 mt-5">
+                            <div class="col-span-6">
                                 <div class="intro-y col-span-12 sm:col-span-6">
                                     <label for="input-wizard-1" class="form-label">รูป</label>
                                     <input  class="form-control" id="Detail_imgright1" name="Detail_imgright1"
-                                    type="file" data-default-file="" accept="image/*" />      
+                                    type="file" data-default-file="" accept="image/*" />
                                 </div>
                             </div>
                             <div class="col-span-12 sm:col-span-6">
@@ -228,7 +228,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <label for="modal-form-4" class="form-label">ธนาคาร</label>
                                 <input id="modal-form-4" name="lastname" type="text" class="form-control" placeholder="ธนาคาร" value="{{old('lastname')}}" required>
                             </div>
-                            
+
                             {{-- เข้ากะ --}}
                                         <div class="col-span-12 sm:col-span-6">
                                             <label for="modal-form-4" class="form-label">เวลาเข้ากะ</label>
@@ -239,7 +239,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                 <option>A1 18.00 - 03.00</option>
                                             </select>
                                         </div>
-                            
+
 
                             {{-- <div class="mb-3">
                                 <ul class="list-group list-group-flush">
@@ -261,7 +261,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div
                                 <button id="add-form-refer-btn" type="button" class="btn btn-dark shadow-md ml-2" >+</button>
                             </div> --}}
-                            
+
                         {{-- <div class="mb-3">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
@@ -309,7 +309,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div>
                             <br> --}}
 
-                            
+
                             {{-- <div class="mb-3">
                                 <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
@@ -337,7 +337,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <input id="modal-form-4" name="lastname" type="text" class="form-control" placeholder="O.T" value="{{old('lastname')}}" required>
                             </div>
                             <br>
-                            
+
                             <div class="col-span-12 sm:col-span-6">
                                 <label for="modal-form-4" class="form-label">ผ่าเที่ยง</label>
                                 {{-- <div class="text-danger mt-2">กรุณาเลือกเวลาเข้ากะ</div> --}}
@@ -398,7 +398,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <option>8</option>
                                 </select>
                             </div>
-                            
+
                             <div class="col-span-12 sm:col-span-6">
                                 <label for="modal-form-3" class="form-label">เบี้ยเลี้ยง</label>
                                 <input id="modal-form-3" name="firstname" type="text" class="form-control" placeholder="เบี้ยเลี้ยง" value="{{old('firstname')}}" required>
@@ -458,7 +458,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <select data-placeholder="Select your favorite actors" name="role" class="tom-select w-full" id="crud-form-2" >
                                     <option value="admin" selected>admin</option>
                                     <option value="viewer">viewer</option>
-                                    
+
                                 </select>
                             </div> --}}
                         </div>
@@ -504,7 +504,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <select data-placeholder="Select your favorite actors" name="role" class="tom-select w-full" id="crud-form-2" >
                                     <option value="admin" @if ($ul2->role == 'admin') selected @endif>admin</option>
                                     <option value="viewer" @if ($ul2->role == 'viewer') selected @endif>viewer</option>
-                                    
+
                                 </select>
                             </div>
                         </div>
@@ -617,7 +617,7 @@ License: You must have a valid license purchased only from themeforest(the above
             const formContainerRefer = document.getElementById("form-container-Refer");
             const addFormRefer = document.getElementById("add-form-refer-btn");
             let formCountRefer = 1;
-        
+
             addFormRefer.addEventListener("click", function() {
                 formCountRefer++;
                 const divRefer = document.createElement("div");
@@ -642,12 +642,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                             </ul>
                         </div>
-                        
-                        
+
+
                 `;
                 formContainerRefer.appendChild(divRefer);
             });
-        
+
             function del_Refer(num){
                 const divRefer = document.getElementById(`refer${num}`);
                 if (divRefer) {
@@ -656,7 +656,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     formCountRefer--;
                     }
                 }
-            }  
+            }
         </script>
     </body>
 </html>
